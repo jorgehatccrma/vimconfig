@@ -44,3 +44,20 @@ This is a three step process:
 
      I personally don't like this one, as it breaks some of my config, but
      some people like to use it.
+
+3. Launch Vim and Install plugins
+
+The first time you launch Vim, it should autmatically install
+[Vundle](https://github.com/VundleVim/Vundle.vim), which is the plugin manager
+of my choice. Only the manager is installed automatically. The plugins you need
+to install from within Vim with a single command:
+
+    :PluginInstall
+
+I could have chosen to trigger this command automatically, but that would force
+you to use all the plugins I've added to `vimrc`. You might want to tweak that
+list before running the `:PluginInstall` command.
+
+**NOTE**: Installing all the pluings in my `vimrc` could take a while.
+
+

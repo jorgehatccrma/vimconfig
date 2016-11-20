@@ -86,8 +86,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'
 Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'daylerees/colour-schemes', { 'rtp': 'vim/' }
-Plugin 'ajh17/Spacegray.vim'
 Plugin 'gerw/vim-HiLinkTrace'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'honza/dockerfile.vim'
@@ -258,11 +256,6 @@ nmap <Leader>tb :TagbarToggle<CR>
 
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
-" use spacegray color scheme
-" colorscheme spacegray
-" from http://daylerees.github.io/
-" colorscheme slime-contrast
-" colorscheme snappy-light
 colorscheme cheerfully_dark
 
 " ## Mappings
