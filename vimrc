@@ -314,7 +314,7 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " Show syntax highlighting groups for word under cursor
 " (pressing control-shift-P)
-nmap <C-S-P> :call <SID>SynStack()<CR>
+nmap <C-S-H> :call <SID>SynStack()<CR>
 
 " toggle line numbers
 nmap <leader>l :set nonumber!<CR>

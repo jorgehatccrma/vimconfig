@@ -50,7 +50,7 @@ hi   Visual       guibg=#008700   ctermbg=28    guifg=#ffffff   ctermfg=15  cter
 
 " Gutter
 hi   FoldColumn   guibg=#000000   ctermbg=0     guifg=#808080   ctermfg=244
-hi   Folded       guibg=#080808   ctermbg=232   guifg=#eeeeee   ctermfg=255
+hi   Folded       guibg=#262626   ctermbg=235   guifg=#949494   ctermfg=246
 hi   SignColumn   guibg=#000000   ctermbg=0     guifg=#808080   ctermfg=244
 
 " Window / Tabs
@@ -158,7 +158,7 @@ hi  link pythonDecoratorName pythonDecorator
 hi   link      vimVar    Type
 
 " Markdown
-hi   link      htmlH1          Constant
+hi   link      htmlH1          Special
 hi   mkdCode   guifg=#ffd700   ctermfg=220   guibg=#3a3a3a   ctermbg=237
 
 
