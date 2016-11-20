@@ -51,11 +51,25 @@ let os = substitute(system('uname'), "\n", "", "")
 " # Plugins
 " -----------------------------------------------------------------------------
 
+" Install Vundle if not installed (adapted from
+" http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/ )
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
+    let iCanHazVundle=0
+endif
+
+
 filetype off                  " required for Vundle
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -119,6 +133,7 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
 
 
 " ## Plugin configs
