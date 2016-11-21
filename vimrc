@@ -499,7 +499,7 @@ endfunction
 
 " Toggle between the two cheerfully_* themes (dark/light)
 function! Cheers()
-  if g:airline_theme == 'cheerfully_dark'
+  if g:airline_theme ==# 'cheerfully_dark'
     let g:airline_theme = 'cheerfully_light'
     colorscheme cheerfully_light
   else
