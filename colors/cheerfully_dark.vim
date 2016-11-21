@@ -110,7 +110,7 @@ call cheerfully#SetHi("PreProc", {'fg': 220})
 " cheerfully#SetHi("Macro", {})
 " cheerfully#SetHi("PreCondit", {})
 
-call cheerfully#SetHi("Type", {'fg': 113})
+call cheerfully#SetHi("Type", {'fg': 112})
 " cheerfully#SetHi("StorageClass", {})
 " cheerfully#SetHi("Structure", {})
 " cheerfully#SetHi("Typedef", {})
@@ -136,8 +136,8 @@ call cheerfully#SetHi("Todo", {'bg': 178, 'fg': 52})
 " ------------------------
 
 " Python
-hi  link pythonInclude    Type
-hi  link pythonStatement  Type
+hi  link pythonInclude    Statement
+hi  link pythonStatement  Statement
 hi  link pythonDecoratorName pythonDecorator
 " hi   pythonBuiltin      guifg=#ffff5f     ctermfg=227
 " hi   pythonExceptions   guifg=#ffff00     ctermfg=226
