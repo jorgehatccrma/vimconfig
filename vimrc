@@ -152,6 +152,7 @@ set laststatus=2
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'cheerfully_dark'
+" let g:airline_theme = 'cheerfully_light'
 " let g:airline_theme = 'wombat'
 " let g:airline_theme = 'murmur'
 " let g:airline_theme = 'term'
@@ -257,15 +258,16 @@ nmap <Leader>tb :TagbarToggle<CR>
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
 colorscheme cheerfully_dark
+" colorscheme cheerfully_light
 
 " ## Mappings
 
 " dark/light color scheme
-nmap <leader>chd :colorscheme cheerfully_dark<CR>
-nmap <leader>chl :colorscheme cheerfully_light<CR>
+nmap <Leader>chd :colorscheme cheerfully_dark<CR>
+nmap <Leader>chl :colorscheme cheerfully_light<CR>
 
-
-
+" or more conviente, toggle between them
+nmap <Leader>c :call Cheers()<CR>
 
 
 " # Spaces And Tabs
@@ -385,7 +387,6 @@ nmap <leader>xp :w \| :! python %<CR>
 
 
 
-
 " # Searching
 " -----------------------------------------------------------------------------
 
@@ -494,4 +495,18 @@ function! FoldText()
   let foldsize = (v:foldend - v:foldstart)
   return getline(v:foldstart).' ('.foldsize.' lines)'
 endfunction
+
+
+" Toggle between the two cheerfully_* themes (dark/light)
+function! Cheers()
+  if g:airline_theme == 'cheerfully_dark'
+    let g:airline_theme = 'cheerfully_light'
+    colorscheme cheerfully_light
+  else
+    let g:airline_theme = 'cheerfully_dark'
+    colorscheme cheerfully_dark
+  endif
+endfunction
+
+
 
