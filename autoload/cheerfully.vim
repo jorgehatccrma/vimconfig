@@ -2,7 +2,7 @@
 "
 " From http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
-:let g:cheerfully#colorlist = {
+let g:cheerfully#colorlist = {
  \   0: '#aaaaaa',  1: '#aaaaaa',  2: '#aaaaaa',  3: '#aaaaaa',
  \   4: '#aaaaaa',  5: '#800080',  6: '#008080',  7: '#c0c0c0',
  \   8: '#808080',  9: '#ff0000',  10: '#00ff00',  11: '#ffff00',
@@ -81,26 +81,26 @@
 "     where all the keys are optional. If a key is present, the corresponding
 "     highlight color is set ('fg' stands for 'foregoround' and 'bg' for
 "     'background')
-:function! cheerfully#SetHi(group, values)
+function! cheerfully#SetHi(group, values)
 
-  :let cmd = "hi " . a:group
+  let cmd = "hi " . a:group
 
-  :if has_key(a:values, 'fg')
-    :let cmd .= " guifg=" . g:cheerfully#colorlist[a:values['fg']]
-    :let cmd .= " ctermfg=" . a:values['fg']
-  :endif
+  if has_key(a:values, 'fg')
+    let cmd .= " guifg=" . g:cheerfully#colorlist[a:values['fg']]
+    let cmd .= " ctermfg=" . a:values['fg']
+  endif
 
-  :if has_key(a:values, 'bg')
-    :let cmd .= " guibg=" . g:cheerfully#colorlist[a:values['bg']]
-    :let cmd .= " ctermbg=" . a:values['bg']
-  :endif
+  if has_key(a:values, 'bg')
+    let cmd .= " guibg=" . g:cheerfully#colorlist[a:values['bg']]
+    let cmd .= " ctermbg=" . a:values['bg']
+  endif
 
-  :if has_key(a:values, 'usenone')
-    :let cmd .= " cterm=NONE"
-  :endif
+  if has_key(a:values, 'usenone')
+    let cmd .= " cterm=NONE"
+  endif
 
   execute(cmd)
 
-:endfunction
+endfunction
 
 
