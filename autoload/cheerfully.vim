@@ -85,7 +85,6 @@ let g:cheerfully#colorlist = {
 " Notes:
 "   'hi' is shorthand for 'highlight'
 "   To check the meaning of the hi groups, :help 'hi'
-t
 function! cheerfully#SetHi(group, values)
 
   let cmd = "hi " . a:group
