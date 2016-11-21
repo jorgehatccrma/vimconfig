@@ -2,11 +2,6 @@
 " " Author: Jorge Herrera <jherreras@gmail.com>
 " " Maintainer: Jorge Herrera <jherreras@gmail.com>
 " " Notes:
-" "    'hi' is shorthand for 'highlight'
-" "    To check the meaning of the hi groups, :help 'hi'
-
-" Color reference:
-" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 set background=light
 
@@ -19,6 +14,8 @@ let g:colors_name = "cheerfully_light"
 let colors_name = "cheerfully_light"
 
 
+" Color reference:
+" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 " Palette reference (as cterm codes) - Try to stick to these colors
 " light-green  : 70
@@ -57,7 +54,7 @@ call cheerfully#SetHi("SignColumn",      { 'bg': 254, 'fg': 243})
 " Window / Tabs
 call cheerfully#SetHi("VertSplit",       { 'bg': 254, 'fg': 28, 'usenone': 1})
 call cheerfully#SetHi("TabLine",         { 'bg': 22, 'fg': 236})
-call cheerfully#SetHi("TabLineFill",         { 'bg': 254, 'fg': 236, 'usenone': 1})
+call cheerfully#SetHi("TabLineFill",     { 'bg': 254, 'fg': 236, 'usenone': 1})
 call cheerfully#SetHi("TabLineSel",      { 'bg': 28, 'fg': 254})
 
 " File Navigation / Searching

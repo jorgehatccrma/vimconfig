@@ -81,6 +81,11 @@ let g:cheerfully#colorlist = {
 "     where all the keys are optional. If a key is present, the corresponding
 "     highlight color is set ('fg' stands for 'foregoround' and 'bg' for
 "     'background')
+"
+" Notes:
+"   'hi' is shorthand for 'highlight'
+"   To check the meaning of the hi groups, :help 'hi'
+t
 function! cheerfully#SetHi(group, values)
 
   let cmd = "hi " . a:group
