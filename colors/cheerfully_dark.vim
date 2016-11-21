@@ -44,7 +44,7 @@ call cheerfully#SetHi("LineNr",          { 'bg':   0, 'fg': 244})
 call cheerfully#SetHi("EndOfBuffer",     { 'bg': 233, 'fg': 246})
 call cheerfully#SetHi("CursorLine",      { 'bg': 234, 'usenone': 1})
 call cheerfully#SetHi("CursorColumn",    { 'bg': 234})
-call cheerfully#SetHi("CursorLineNr",    { 'fg': 39})
+call cheerfully#SetHi("CursorLineNr",    { 'fg': 220})
 call cheerfully#SetHi("ColorColumn",     { 'bg': 235})
 call cheerfully#SetHi("Visual",          { 'bg': 28, 'fg': 15, 'usenone': 1})
 
