@@ -96,11 +96,11 @@ Plugin 'sirver/ultisnips'
 " Ultisnippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 Plugin 'JamshedVesuna/vim-markdown-preview'
-Plugin 'Raimondi/delimitMate'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
 Plugin 'majutsushi/tagbar'
+Plugin 'jiangmiao/auto-pairs'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
