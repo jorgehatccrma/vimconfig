@@ -139,7 +139,7 @@ call cheerfully#SetHi("Todo", {'bg': 178, 'fg': 52})
 hi  link pythonInclude    Type
 hi  link pythonStatement  Type
 hi  link pythonDecoratorName pythonDecorator
-" hi   pythonBuiltin      guifg=#ffff5f     ctermfg=227
+hi  link pythonBuiltin    PreProc
 " hi   pythonExceptions   guifg=#ffff00     ctermfg=226
 " hi   link               pythonDecorator   Function
 
