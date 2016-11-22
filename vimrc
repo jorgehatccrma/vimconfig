@@ -56,11 +56,11 @@ let os = substitute(system('uname'), "\n", "", "")
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 if !filereadable(vundle_readme)
-    echo "Installing Vundle.."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
-    let iCanHazVundle=0
+  echo "Installing Vundle.."
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
+  let iCanHazVundle=0
 endif
 
 
@@ -161,7 +161,7 @@ let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#bufferline#overwrite_variables = 0
 
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 " " unicode symbols
@@ -222,8 +222,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "passive_filetypes": ["cpp", "c", "hpp", "h"] }
+      \ "mode": "active",
+      \ "passive_filetypes": ["cpp", "c", "hpp", "h"] }
 
 
 " ### UltiSnips
@@ -321,7 +321,11 @@ nmap <C-S-H> :call <SID>SynStack()<CR>
 " toggle line numbers
 nmap <leader>l :set nonumber!<CR>
 
+" remove surrounding spaces
+nmap ]= F<space>xf<space>xh
 
+" add surrouding spaces (depends on vim-surround)
+nmap [= i<space><ESC>la<space><ESC>h
 
 
 " # Tabs and splits
