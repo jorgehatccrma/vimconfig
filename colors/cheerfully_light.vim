@@ -82,7 +82,7 @@ call cheerfully#SetHi("MatchParen",      { 'bg': 214, 'fg': 241})
 
 " Standard vim groups (see :help group-name)
 " Really, type :help group-name, you'll see the color scheme in action!)
-call cheerfully#SetHi("Comment", {'fg': 247})
+call cheerfully#SetHi("Comment", {'fg': 67})
 
 call cheerfully#SetHi("Constant", {'fg': 164})
 call cheerfully#SetHi("String", {'fg': 166})
