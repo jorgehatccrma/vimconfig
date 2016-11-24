@@ -29,8 +29,8 @@ let g:airline#themes#cheerfully_light#palette = {}
 " let g:bufferline_active_highlight = 'ActiveBuffer'
 " let g:bufferline_inactive_highlight = 'InactiveBuffer'
 " These are defatuls that can be overriden in each mode
-let s:InactiveBuffer  = [ '#606060' , '#c6c6c6' , 241 , 251 ]
-let s:ActiveBuffer  = [ '#bcbcbc' , '#c6c6c6' , 250 , 251 ]
+let s:InactiveBuffer  = [ '#949494' , '#dadada' , 246 , 253 ]
+let s:ActiveBuffer  = [ '#bcbcbc' , '#dadada' , 250 , 253 ]
 
 " First let's define some arrays. The s: is just a VimL thing for scoping the
 " variables to the current script. Without this, these variables would be
@@ -39,8 +39,8 @@ let s:ActiveBuffer  = [ '#bcbcbc' , '#c6c6c6' , 250 , 251 ]
 " [ guifg, guibg, ctermfg, ctermbg, opts ]. See "help attr-list" for valid
 " values for the "opt" value.
 let s:N1   = [ '#87ff00' , '#008700' , 118 , 28 ]
-let s:N2   = [ '#005f00' , '#87d700' , 22 , 112 ]
-let s:N3   = [ '#005f00' , '#dadada' , 22 , 253 ]
+let s:N2   = [ '#005f00' , '#87d700' ,  22 , 112 ]
+let s:N3   = [ '#005f00' , '#dadada' ,  22 , 253 ]
 let g:airline#themes#cheerfully_light#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 let g:airline#themes#cheerfully_light#palette.normal.ActiveBuffer = s:N3
 let g:airline#themes#cheerfully_light#palette.normal.InactiveBuffer = s:InactiveBuffer
@@ -75,13 +75,13 @@ let g:airline#themes#cheerfully_light#palette.replace.airline_a = [ s:I1[0]   , 
 let g:airline#themes#cheerfully_light#palette.replace_modified = g:airline#themes#cheerfully_light#palette.insert_modified
 
 
-let s:V1 = [ '#ffd700' , '#af0000' , 220 , 124 ]
+let s:V1 = [ '#ffd700' , '#d75f00' , 220 , 166 ]
 let s:V2 = [ '#5f0000' , '#ffd700' , 52  , 220 ]
 let s:V3 = [ '#5f0000' , '#dadada' , 52 , 253 ]
 let g:airline#themes#cheerfully_light#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
 let g:airline#themes#cheerfully_light#palette.visual.ActiveBuffer = s:V3
 let g:airline#themes#cheerfully_light#palette.visual_modified = {
-      \ 'airline_c': [ '#5f0000' , '#ffff00' , 52      , 226     , ''     ] ,
+      \ 'airline_c': [ '#5f0000' , '#ffff00' , 52      , 227     , ''     ] ,
       \ }
 let s:VAB = [ '#5f0000' , '#ffff00' , 52  , 226 ]
 let g:airline#themes#cheerfully_light#palette.visual_modified.ActiveBuffer = s:VAB

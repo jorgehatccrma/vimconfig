@@ -29,8 +29,8 @@ let g:airline#themes#cheerfully_dark#palette = {}
 " let g:bufferline_active_highlight = 'ActiveBuffer'
 " let g:bufferline_inactive_highlight = 'InactiveBuffer'
 " These are defatuls that can be overriden in each mode
-let s:InactiveBuffer  = [ '#949494' , '#444444' , 246 , 238 ]
-let s:ActiveBuffer  = [ '#bcbcbc' , '#444444' , 250 , 238 ]
+let s:InactiveBuffer  = [ '#949494' , '#202020' , 246 , 234 ]
+let s:ActiveBuffer  = [ '#bcbcbc' , '#202020' , 250 , 234 ]
 
 " First let's define some arrays. The s: is just a VimL thing for scoping the
 " variables to the current script. Without this, these variables would be
