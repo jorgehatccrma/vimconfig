@@ -237,8 +237,7 @@ let g:ultisnips_python_style = "google"
 
 " ### Bufferline
 
-" let g:bufferline_active_highlight = 'StatusLineNC'
-" let g:bufferline_inactive_highlight = 'StatusLine'
+" custom highlight groups to ingrate with vim-airline/theme/cheerfully*
 let g:bufferline_active_highlight = 'ActiveBuffer'
 let g:bufferline_inactive_highlight = 'InactiveBuffer'
 
@@ -248,6 +247,12 @@ let g:bufferline_inactive_highlight = 'InactiveBuffer'
 
 " toggle tag bar
 nmap <Leader>tb :TagbarToggle<CR>
+
+
+" ### AutoPairs
+
+" to wrap the whole word if right next to one
+let g:AutoPairsShortcutFastWrap = '<M-e>'
 
 
 
@@ -322,10 +327,10 @@ nmap <C-S-H> :call <SID>SynStack()<CR>
 nmap <leader>l :set nonumber!<CR>
 
 " remove surrounding spaces
-nmap ]= F<space>xf<space>xh
+nmap [= F<space>xf<space>xh
 
 " add surrouding spaces (depends on vim-surround)
-nmap [= i<space><ESC>la<space><ESC>h
+nmap ]= i<space><ESC>la<space><ESC>h
 
 
 " # Tabs and splits
@@ -379,6 +384,13 @@ set formatoptions-=t
 " treat all numerals as decimal (otherwise, using <C-a> on 007 will yield 010,
 " as numbers preceeded by 0 are considered octal numbers
 set nrformats=
+
+
+" # Copy/Paste
+
+" use the unnamed register as clipboar (instead of the default * register)
+set clipboard=unnamed
+
 
 " ## Mappings
 
