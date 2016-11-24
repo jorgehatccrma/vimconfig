@@ -60,4 +60,10 @@ list before running the `:PluginInstall` command.
 
 **NOTE**: Installing all the pluings in my `vimrc` could take a while.
 
+### NeoVim
+
+I recently installed [NeoVim](https://neovim.io) to try it out. A simple way to
+use this repo as the NeoVim config is to link `~/.vim/init.vim` to `.vim/vimrc`:
+
+    ln -s ~/.vim/vimrc ~/.vim/init.vim
 
