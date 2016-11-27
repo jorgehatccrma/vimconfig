@@ -84,7 +84,7 @@ call cheerfully#SetHi("MatchParen",      { 'bg': 172, 'fg': 246})
 " Really, type :help group-name, you'll see the color scheme in action!)
 call cheerfully#SetHi("Comment", {'fg': 67})
 
-call cheerfully#SetHi("Constant", {'fg': 127})
+call cheerfully#SetHi("Constant", {'fg': 163})
 call cheerfully#SetHi("String", {'fg': 172})
 hi   link   Character    String
 call cheerfully#SetHi("Float", {'fg': 39})
@@ -159,7 +159,13 @@ hi   link      vimVar    Type
 hi   link      htmlH1          Special
 call cheerfully#SetHi("mkdCode", {'bg': 237, 'fg': 220})
 
+" Javascript
+hi   link      jsGlobalObjects PreProc
 
+" CSS
+hi   link      cssColor        Float
+hi   link      cssUIAttr       PreProc
+hi   link      cssCommonAttr   PreProc
 
 " ------------------------
 "  CUSTOM ONES

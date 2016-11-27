@@ -159,6 +159,13 @@ hi   link      vimVar    Type
 hi   link      htmlH1          Special
 call cheerfully#SetHi("mkdCode", {'bg': 237, 'fg': 94})
 
+" Javascript
+hi   link      jsGlobalObjects PreProc
+
+" CSS
+hi   link      cssColor        Float
+hi   link      cssUIAttr       PreProc
+hi   link      cssCommonAttr   PreProc
 
 
 " ------------------------

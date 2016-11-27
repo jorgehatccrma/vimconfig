@@ -91,8 +91,8 @@ let s:IA1 = [ '#a8a8a8' , '#585858' , 248 , 240 , '' ]
 let s:IA2 = [ '#444444' , '#808080' , 238 , 244 , '' ]
 let s:IA3 = [ '#444444' , '#9e9e9e' , 238 , 247 , '' ]
 let g:airline#themes#cheerfully_light#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
-let g:airline#themes#cheerfully_light#palette.inactive.ActiveBuffer = s:IA3
 let g:airline#themes#cheerfully_light#palette.inactive.InactiveBuffer = s:InactiveBuffer
+let g:airline#themes#cheerfully_light#palette.inactive.ActiveBuffer = s:IA3
 let g:airline#themes#cheerfully_light#palette.inactive_modified = {
       \ 'airline_c': [ '#875faf' , '' , 97 , '' , '' ] ,
       \ }

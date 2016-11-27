@@ -101,6 +101,9 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
 Plugin 'majutsushi/tagbar'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'pangloss/vim-javascript'
+Plugin 'othree/html5.vim'
+Plugin 'othree/html5-syntax.vim'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -225,6 +228,15 @@ let g:syntastic_mode_map = {
       \ "mode": "active",
       \ "passive_filetypes": ["cpp", "c", "hpp", "h"] }
 
+" see https://github.com/jasonlong/dotfiles/blob/master/vimrc for more ignores
+let g:syntastic_html_tidy_ignore_errors = [
+            \ "<svg> is not recognized!",
+            \ "discarding unexpected <svg>",
+            \ "discarding unexpected </svg>",
+            \ ]
+
+" use jshint
+let g:syntastic_javascript_checkers = ['jshint']
 
 " ### UltiSnips
 
@@ -252,7 +264,9 @@ nmap <Leader>tb :TagbarToggle<CR>
 " ### AutoPairs
 
 " to wrap the whole word if right next to one
-let g:AutoPairsShortcutFastWrap = '<M-e>'
+" This might need to be wrapped in the OS X specifi section, but need testing
+" over ssh AND locally in a linux box
+let g:AutoPairsShortcutFastWrap = '<ESC>e'
 
 
 
@@ -389,7 +403,7 @@ set nrformats=
 " # Copy/Paste
 
 " use the unnamed register as clipboar (instead of the default * register)
-set clipboard=unnamed
+" set clipboard=unnamed
 
 
 " ## Mappings
@@ -406,8 +420,9 @@ nmap <leader>xp :w \| :! python %<CR>
 " # Searching
 " -----------------------------------------------------------------------------
 
-set hlsearch  " highlight all seardh matches
-set incsearch " search as characters are entered
+set hlsearch             " highlight all seardh matches
+set incsearch            " search as characters are entered
+set ignorecase smartcase " case insensitive search
 
 
 
