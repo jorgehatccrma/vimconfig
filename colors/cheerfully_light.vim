@@ -18,8 +18,8 @@ let colors_name = "cheerfully_light"
 " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 " Palette reference (as cterm codes) - Try to stick to these colors
-" light-green  : 70
-" light-green2 : 106
+" dark-green   : 28
+" light-green  : 106
 " green        : 22
 " yellow       : 94
 " orange       : 166
@@ -63,8 +63,8 @@ call cheerfully#SetHi("IncSearch",       { 'bg': 34, 'fg': 254})
 call cheerfully#SetHi("Directory",       { 'fg': 33, 'usenone': 1})
 
 " Autocomplete menu
-call cheerfully#SetHi("Pmenu",           { 'bg': 241, 'fg': 0})
-call cheerfully#SetHi("PmenuSel",        { 'bg': 22, 'fg': 70})
+call cheerfully#SetHi("Pmenu",           { 'bg': 252, 'fg': 0})
+call cheerfully#SetHi("PmenuSel",        { 'bg': 22, 'fg': 106})
 
 " Wildmenu/bufferline
 call cheerfully#SetHi("WildMenu",        { 'bg': 34, 'fg': 154, 'usenone': 1})
@@ -72,6 +72,7 @@ call cheerfully#SetHi("StatusLine",      { 'bg': 28, 'fg': 251, 'usenone': 1})
 call cheerfully#SetHi("StatusLineNC",    { 'bg': 34, 'fg': 154, 'usenone': 1})
 
 call cheerfully#SetHi("SpellBad",        { 'bg': 125, 'fg': 230})
+call cheerfully#SetHi("SpellCap",        { 'bg': 208, 'fg': 232})
 call cheerfully#SetHi("MatchParen",      { 'bg': 214, 'fg': 241})
 
 
@@ -95,7 +96,7 @@ call cheerfully#SetHi("Identifier", {'fg': 160})
 " hi   link         Function        Identifier
 
 
-call cheerfully#SetHi("Statement", {'fg': 70})
+call cheerfully#SetHi("Statement", {'fg': 28})
 " cheerfully#SetHi("Conditional", {})
 " cheerfully#SetHi("Repeat", {})
 " cheerfully#SetHi("Label", {})
@@ -130,6 +131,15 @@ call cheerfully#SetHi("Underlined", {'fg': 94})
 call cheerfully#SetHi("Error", {'bg': 160})
 
 call cheerfully#SetHi("Todo", {'bg': 178, 'fg': 52})
+
+
+" ------------------------
+"  SYNTASTIC SPECIFIC
+" ------------------------
+
+highlight link SyntasticError   SpellBad
+highlight link SyntasticWarning SpellCap
+
 
 " ------------------------
 "  LANGUAGE SPECIFIC

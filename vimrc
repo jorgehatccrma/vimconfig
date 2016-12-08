@@ -160,7 +160,7 @@ let g:airline_theme = 'cheerfully_dark'
 " let g:airline_theme = 'murmur'
 " let g:airline_theme = 'term'
 " let g:airline_theme = 'badwolf'
-let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#enabled = 0
 let g:airline#extensions#bufferline#overwrite_variables = 0
 
 if !exists('g:airline_symbols')
@@ -238,6 +238,23 @@ let g:syntastic_html_tidy_ignore_errors = [
 " use jshint
 let g:syntastic_javascript_checkers = ['jshint']
 
+" ignore some html warnings/errors
+let g:syntastic_html_tidy_ignore_errors= [
+      \ "'<' + '/' + letter not allowed here",
+      \ "<svg> is not recognized!",
+      \ "discarding unexpected <svg>",
+      \ "discarding unexpected </svg>",
+      \ "<input> proprietary attribute \"min\"",
+      \ "<input> proprietary attribute \"max\"",
+      \ "<input> proprietary attribute \"oninput\"",
+      \]
+
+let g:syntastic_quiet_messages = {
+      \ "regex": ".*['.*'] is better written in dot notation."
+      \}
+
+
+
 " ### UltiSnips
 
 " Custom snippets location
@@ -305,8 +322,6 @@ set expandtab
 
 
 
-
-
 " # UI Config
 " -----------------------------------------------------------------------------
 
@@ -325,10 +340,17 @@ set scrolloff=5        " number of context lines above and below the cursor
 
 match ErrorMsg '\s\+$' " Highlight trailing whitespace
 
+"saner autocomplete menu behavior
+set completeopt=longest,menuone 
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+
 " ## Mappings
 
 " close a buffer w/o closing window
-map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+map <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+" map <Leader>q :lclose<bar>bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Press space to turn off highlighting and clear any message already displayed
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
@@ -345,6 +367,13 @@ nmap [= F<space>xf<space>xh
 
 " add surrouding spaces (depends on vim-surround)
 nmap ]= i<space><ESC>la<space><ESC>h
+
+" pretty print JSON file
+nmap <Leader>json :%!python -m json.tool<CR>
+
+" preserve selection when indenting with < & > keys
+vnoremap < <gv
+vnoremap > >gv
 
 
 " # Tabs and splits
@@ -366,7 +395,6 @@ nnoremap td    :tabclose<CR>
 nnoremap tn    :tabnew<CR>
 nnoremap <S-h> gT
 nnoremap <S-l> gt
-
 
 
 
@@ -437,43 +465,48 @@ set foldnestmax=10      " 10 nested fold max
 
 
 
-" # Autogroups
-" -----------------------------------------------------------------------------
-
-" Hack to distinguish active windows from non-active ones
-" It turns line numbers off for non-active windows.
-augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set number
-    autocmd WinLeave * set nonumber
-augroup END
-
-
-
-
-
 " # Autocommands
 " -----------------------------------------------------------------------------
 
 if has("autocmd")
-  " FileType specific spacing and tabbing
-  autocmd FileType cpp,c,hpp,h setlocal sw=2 ts=2 sts=2 expandtab
-  autocmd FileType css,scss,less setlocal sw=2 ts=2 sts=2 expandtab
-  autocmd FileType yaml setlocal sw=2 ts=2 sts=2 expandtab
-  autocmd FileType python setlocal sw=4 ts=4 sts=4 expandtab
-  autocmd FileType javascript setlocal ts=2 sts=2 sw=2 noexpandtab
+  " Hack to distinguish active windows from non-active ones
+  " It turns line numbers off for non-active windows.
+  augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set number
+    autocmd WinLeave * set nonumber
+  augroup END
 
-  " no line numbers in COMMIT_EDITMSG
-  autocmd BufNewFile,BufRead COMMIT_EDITMSG set nonumber
 
-  " recognize Dockerfile.* as a dockerfile
-  au BufNew,BufRead Dockerfile.* set filetype=dockerfile
+  augroup vimrc
+    " clear (remove) all vimrc autocomands
+    autocmd!
 
-  " run python scripts with <F5>
-  autocmd BufRead *.py nmap <F5> :!python %<CR>
+    "" reload .vimrc when saving it
+    "autocmd! bufwritepost vimrc source %
+    "" autocmd! bufwritepost .vimrc source %
+
+    " FileType specific spacing and tabbing
+    autocmd FileType cpp,c,hpp,h setlocal sw=2 ts=2 sts=2 expandtab
+    autocmd FileType css,scss,less setlocal sw=2 ts=2 sts=2 expandtab
+    autocmd FileType yaml setlocal sw=2 ts=2 sts=2 expandtab
+    autocmd FileType python setlocal sw=4 ts=4 sts=4 expandtab
+    autocmd FileType javascript setlocal ts=2 sts=2 sw=2 noexpandtab
+
+    " provide larger context for syntax highlighting (useful for html
+    " files with javascript in them)
+    autocmd BufEnter *.html :syntax sync fromstart
+
+    " no line numbers in COMMIT_EDITMSG
+    autocmd BufNewFile,BufRead COMMIT_EDITMSG set nonumber
+
+    " recognize Dockerfile.* as a dockerfile
+    autocmd BufNew,BufRead Dockerfile.* set filetype=dockerfile
+
+    " run python scripts with <F5>
+    autocmd BufRead *.py nmap <F5> :!python %<CR>
+  augroup END
 endif
-
-
 
 
 

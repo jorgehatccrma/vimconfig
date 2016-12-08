@@ -18,8 +18,8 @@ let colors_name = "cheerfully_dark"
 " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 " Palette reference (as cterm codes) - Try to stick to these colors
-" light-green  : 76
-" light-green2 : 112
+" dark-green   : 28
+" light-green  : 112
 " green        : 22
 " yellow       : 220
 " orange       : 172
@@ -72,7 +72,8 @@ call cheerfully#SetHi("StatusLine",      { 'bg': 22, 'fg': 249, 'usenone': 1})
 call cheerfully#SetHi("StatusLineNC",    { 'bg': 28, 'fg': 118, 'usenone': 1})
 
 call cheerfully#SetHi("SpellBad",        { 'bg': 125, 'fg': 230})
-call cheerfully#SetHi("MatchParen",      { 'bg': 172, 'fg': 246})
+call cheerfully#SetHi("SpellCap",        { 'bg': 208, 'fg': 232})
+call cheerfully#SetHi("MatchParen",      { 'bg': 172, 'fg': 0})
 
 
 
@@ -95,7 +96,7 @@ call cheerfully#SetHi("Identifier", {'fg': 160})
 " hi   link         Function        Identifier
 
 
-call cheerfully#SetHi("Statement", {'fg': 76})
+call cheerfully#SetHi("Statement", {'fg': 28})
 " cheerfully#SetHi("Conditional", {})
 " cheerfully#SetHi("Repeat", {})
 " cheerfully#SetHi("Label", {})
@@ -130,6 +131,15 @@ call cheerfully#SetHi("Underlined", {'fg': 220})
 call cheerfully#SetHi("Error", {'bg': 124})
 
 call cheerfully#SetHi("Todo", {'bg': 178, 'fg': 52})
+
+
+" ------------------------
+"  SYNTASTIC SPECIFIC
+" ------------------------
+
+highlight link SyntasticError   SpellBad
+highlight link SyntasticWarning SpellCap
+
 
 " ------------------------
 "  LANGUAGE SPECIFIC

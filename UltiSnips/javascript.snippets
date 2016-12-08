@@ -10,7 +10,23 @@ snippet clv
 console.log('$1: ', ${1});
 endsnippet
 
-snippet err
+snippet error
 console.error(${1});
 endsnippet
 
+snippet warn
+console.warn(${1});
+endsnippet
+
+snippet info
+console.info(${1});
+endsnippet
+
+snippet ifarg
+${1:me.attribute} = function ${2}(${3:value}) {
+	if (!arguments.length) return ${4:property};
+	$4 = $3;
+	$0
+	return ${5:me};
+};
+endsnippet
