@@ -21,7 +21,11 @@
 
 set nocompatible   " disable Vi compatible mode (must be first line!!!)
 set timeoutlen=500 " max delay (ms) between multy key-stroke commands
-set shell=bash\ -l " use login shell, so it sources .bash_profile
+" THIS CAN MAKE STARTUP REALLY SLOW
+" set shell=bash\ -l " use login shell, so it sources .bash_profile
+
+" As an alternative, I've created an alias in my ~/.bash_profile for vim:
+" alias vim='vim -c "set shell=bash\ -l"'
 
 
 " ## OS specific stuff
@@ -214,7 +218,7 @@ let NERDSpaceDelims = 1
 
 " ### Syntastic
 let g:syntastic_enable_python_checker = 1
-let g:syntastic_python_checkers = ['pycodestyle']
+let g:syntastic_python_checkers = ['pycodestyle', 'flake8']
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -554,6 +558,7 @@ function! MDFold(lnum)
     return '='
 endfunction
 
+
 " Helper function to display nicer folded text
 function! FoldText()
   let foldsize = (v:foldend - v:foldstart)
@@ -575,6 +580,4 @@ function! Cheers()
     colorscheme cheerfully_dark
   endif
 endfunction
-
-
 

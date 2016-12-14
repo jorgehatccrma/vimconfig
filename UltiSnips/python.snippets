@@ -1,8 +1,8 @@
 snippet walk
 for ${1:root}, ${2:dirs}, ${3:files} in os.walk(${4:'.'}):
 	for ${5:name} in $3:
-		print(os.path.join($1, $5)):
+		print(os.path.join($1, $5))
 	for ${6:name} in dirs:
-		print(os.path.join($1, $6)):
+		print(os.path.join($1, $6))
 	$0
 endsnippet
