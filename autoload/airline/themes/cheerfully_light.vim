@@ -118,8 +118,8 @@ let g:airline#themes#cheerfully_light#palette.accents = {
 if !get(g:, 'loaded_ctrlp', 0)
   finish
 endif
-let g:airline#themes#cheerfully_light#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
-      \ [ '#d7d7ff' , '#5f00af' , 189 , 55  , ''     ],
-      \ [ '#ffffff' , '#875fd7' , 231 , 98  , ''     ],
-      \ [ '#5f00af' , '#ffffff' , 55  , 231 , 'bold' ])
+let g:airline#themes#cheerfully_dark#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
+      \ [ '#d7d7ff' , '#dadada' , 189 , 253 , ''     ],
+      \ [ '#ffffff' , '#8700d7' , 231 , 93  , ''     ],
+      \ [ '#ffffff' , '#5f00af' , 231 , 55  , 'bold' ])
 

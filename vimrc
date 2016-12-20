@@ -18,7 +18,6 @@
 " :PluginClean
 "
 " Must be first line !!!!
-
 set nocompatible   " disable Vi compatible mode (must be first line!!!)
 set timeoutlen=500 " max delay (ms) between multy key-stroke commands
 " THIS CAN MAKE STARTUP REALLY SLOW
@@ -108,6 +107,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'othree/html5-syntax.vim'
+Plugin 'kien/ctrlp.vim'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -208,7 +208,8 @@ let g:vim_markdown_folding_disable = 1
 
 " ### Mardown preview
 " use grip (i.e. GitHub flavored markdown, I think)
-let vim_markdown_preview_github=1
+let g:vim_markdown_preview_github=1
+let g:vim_markdown_preview_hotkey='<C-m>'
 
 
 " ### NERDCommenter
@@ -223,9 +224,9 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_mode_map = {
@@ -296,6 +297,7 @@ let g:AutoPairsShortcutFastWrap = '<ESC>e'
 " -----------------------------------------------------------------------------
 
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
+set t_ut=  " fixes background incompatibility between vim and tmux
 
 colorscheme cheerfully_dark
 " colorscheme cheerfully_light
@@ -354,7 +356,6 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
 
 " close a buffer w/o closing window
 map <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
-" map <Leader>q :lclose<bar>bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Press space to turn off highlighting and clear any message already displayed
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
@@ -378,6 +379,9 @@ nmap <Leader>json :%!python -m json.tool<CR>
 " preserve selection when indenting with < & > keys
 vnoremap < <gv
 vnoremap > >gv
+
+" toggle relative line numbers
+nmap <Leader>r :set relativenumber!<CR>
 
 
 " # Tabs and splits
