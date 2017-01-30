@@ -20,11 +20,6 @@
 " Must be first line !!!!
 set nocompatible   " disable Vi compatible mode (must be first line!!!)
 set timeoutlen=500 " max delay (ms) between multy key-stroke commands
-" THIS CAN MAKE STARTUP REALLY SLOW
-" set shell=bash\ -l " use login shell, so it sources .bash_profile
-
-" As an alternative, I've created an alias in my ~/.bash_profile for vim:
-" alias vim='vim -c "set shell=bash\ -l"'
 
 
 " ## OS specific stuff
@@ -94,6 +89,8 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'honza/dockerfile.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-obsession'
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'sirver/ultisnips'
 " Ultisnippets are separated from the engine. Add this if you want them:
@@ -108,6 +105,14 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'othree/html5-syntax.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'motus/pig.vim'
+Plugin 'danro/rename.vim'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'moll/vim-node'
+" Plugin 'wookiehangover/jshint.vim'
+" Plugin 'walm/jshint.vim'
+" Plugin 'Shutnik/jshint2.vim'
+Plugin 'mxw/vim-jsx'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -214,8 +219,9 @@ let g:vim_markdown_preview_hotkey='<C-m>'
 
 " ### NERDCommenter
 let g:NERDDefaultAlign = 'left'
+
 " add extrace space after comment character, for every language
-let NERDSpaceDelims = 1
+ let NERDSpaceDelims = 1
 
 " ### Syntastic
 let g:syntastic_enable_python_checker = 1
@@ -241,7 +247,8 @@ let g:syntastic_html_tidy_ignore_errors = [
             \ ]
 
 " use jshint
-let g:syntastic_javascript_checkers = ['jshint']
+" let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 
 " ignore some html warnings/errors
 let g:syntastic_html_tidy_ignore_errors= [
@@ -291,6 +298,11 @@ nmap <Leader>tb :TagbarToggle<CR>
 let g:AutoPairsShortcutFastWrap = '<ESC>e'
 
 
+
+" ### Clanf-format
+
+let g:clang_format#code_style = 'google'
+let g:clang_format#command = 'clang-format-3.8'
 
 
 " # Colors
@@ -347,7 +359,7 @@ set scrolloff=5        " number of context lines above and below the cursor
 match ErrorMsg '\s\+$' " Highlight trailing whitespace
 
 "saner autocomplete menu behavior
-set completeopt=longest,menuone 
+set completeopt=longest,menuone
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
@@ -513,6 +525,17 @@ if has("autocmd")
 
     " run python scripts with <F5>
     autocmd BufRead *.py nmap <F5> :!python %<CR>
+
+    " fixes .pig syntax highlighting
+    autocmd BufEnter *.pig :set syntax=pig
+
+    " make the shell a login shell
+    autocmd VimEnter * :set shell=bash\ -l
+    " is better to make the shell a login shel using autocmd on VimEnter
+    " instead of setting shell directlyi in the vimrc file, cause setting the
+    " shell in the vimrc changes the shell before loading pluggins, making
+    " startup time EXTREMELY SLOW!
+
   augroup END
 endif
 
