@@ -83,7 +83,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'
-Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'gerw/vim-HiLinkTrace'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'honza/dockerfile.vim'
@@ -100,7 +100,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
 Plugin 'majutsushi/tagbar'
-Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'othree/html5-syntax.vim'
@@ -113,6 +113,12 @@ Plugin 'moll/vim-node'
 " Plugin 'walm/jshint.vim'
 " Plugin 'Shutnik/jshint2.vim'
 Plugin 'mxw/vim-jsx'
+Plugin 'fatih/vim-go'
+" Plugin 'dodie/vim-disapprove-deep-indentation'
+
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+Plugin 'google/vim-glaive'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -143,6 +149,7 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
 
 
 
@@ -299,10 +306,23 @@ let g:AutoPairsShortcutFastWrap = '<ESC>e'
 
 
 
-" ### Clanf-format
+" ### Clang-format
 
-let g:clang_format#code_style = 'google'
+" let g:clang_format#code_style = 'llvm'
+" let g:clang_format#code_style = 'google'
+let g:clang_format#code_style = 'chromium'
+" let g:clang_format#code_style = 'mozilla'
 let g:clang_format#command = 'clang-format-3.8'
+
+" detect a .clang-format
+let g:clang_format#detect_style_file = 1
+
+
+" ### Indentation disaproval
+
+" let g:LookOfDisapprovalTabTreshold=5
+" let g:LookOfDisapprovalSpaceTreshold=(&tabstop*5)
+
 
 
 " # Colors
@@ -349,6 +369,7 @@ set colorcolumn=80     " visible mark at 80 characters
 set textwidth=80       " define text width
 set mouse=a            " Mouse on in every mode
 set number             " show line numbers
+set relativenumber     " display relaive numbers by default
 set cursorline         " always hightlight cursor line
 set foldcolumn=3       " show 3 fold levels in the gutter
 set wildmenu           " visual autocomplete for command menu
@@ -362,6 +383,9 @@ match ErrorMsg '\s\+$' " Highlight trailing whitespace
 set completeopt=longest,menuone
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+"nicer pane separators
+set fillchars=vert:│
 
 
 " ## Mappings
@@ -506,12 +530,16 @@ if has("autocmd")
     "autocmd! bufwritepost vimrc source %
     "" autocmd! bufwritepost .vimrc source %
 
+    " cmake file type
+    autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
+
     " FileType specific spacing and tabbing
     autocmd FileType cpp,c,hpp,h setlocal sw=2 ts=2 sts=2 expandtab
     autocmd FileType css,scss,less setlocal sw=2 ts=2 sts=2 expandtab
     autocmd FileType yaml setlocal sw=2 ts=2 sts=2 expandtab
     autocmd FileType python setlocal sw=4 ts=4 sts=4 expandtab
     autocmd FileType javascript setlocal ts=2 sts=2 sw=2 noexpandtab
+    autocmd FileType cmake setlocal sw=4 ts=4 sts=4 expandtab
 
     " provide larger context for syntax highlighting (useful for html
     " files with javascript in them)
@@ -537,7 +565,22 @@ if has("autocmd")
     " startup time EXTREMELY SLOW!
 
   augroup END
+
+  " augroup autoformat_settings
+  "   " autocmd FileType bzl AutoFormatBuffer buildifier
+  "   " autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  "   autocmd FileType proto,javascript AutoFormatBuffer clang-format
+  "   " autocmd FileType dart AutoFormatBuffer dartfmt
+  "   autocmd FileType go AutoFormatBuffer gofmt
+  "   " autocmd FileType gn AutoFormatBuffer gn
+  "   autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  "   " autocmd FileType java AutoFormatBuffer google-java-format
+  "   autocmd FileType python AutoFormatBuffer yapf
+  "   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  " augroup END
+
 endif
+
 
 
 
@@ -608,3 +651,15 @@ function! Cheers()
   endif
 endfunction
 
+" Formatter for python, a-la ClangFormat
+" powered by yapf (https://github.com/google/yapf)
+function! PythonFormat()
+  " echo "Running Python formatter!"
+
+  " Clear Syntastic warnings and errors
+  " this depends on Syntastic (I should run it only if preset)
+  execute ":SyntasticReset"
+
+  " actually run the formatting tool
+  execute ":0,$!yapf"
+endfunction
