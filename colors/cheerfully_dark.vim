@@ -3,7 +3,7 @@
 " " Maintainer: Jorge Herrera <jherreras@gmail.com>
 " " Notes:
 
-set background=light
+set background=dark
 
 hi clear
 if exists('syntax_on')

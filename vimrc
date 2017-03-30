@@ -77,7 +77,7 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'godlygeek/tabular'
@@ -116,9 +116,13 @@ Plugin 'mxw/vim-jsx'
 Plugin 'fatih/vim-go'
 " Plugin 'dodie/vim-disapprove-deep-indentation'
 
+" Google's code formatting tools
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
+
+" LaTeX
+Plugin 'vim-latex/vim-latex'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -214,6 +218,9 @@ endif
 " file browser mapped to \p
 nmap <silent> <Leader>p :execute "NERDTreeToggle" getcwd()<CR>
 
+" hightlight current file on the tree
+nmap <Leader>f :NERDTreeFind<CR>
+
 " ### Markdown
 " Disable plasticboy/vim-markdown's folding
 let g:vim_markdown_folding_disable = 1
@@ -226,9 +233,15 @@ let g:vim_markdown_preview_hotkey='<C-m>'
 
 " ### NERDCommenter
 let g:NERDDefaultAlign = 'left'
+" let g:NERDDefaultAlign = 'start'
 
 " add extrace space after comment character, for every language
  let NERDSpaceDelims = 1
+
+" change comment character for .ini files
+" let g:NERDCustomDelimiters = {
+"     \ 'dosini': { 'left': '#'}
+" \ }
 
 " ### Syntastic
 let g:syntastic_enable_python_checker = 1
@@ -271,7 +284,6 @@ let g:syntastic_html_tidy_ignore_errors= [
 let g:syntastic_quiet_messages = {
       \ "regex": ".*['.*'] is better written in dot notation."
       \}
-
 
 
 " ### UltiSnips
@@ -325,6 +337,21 @@ let g:clang_format#detect_style_file = 1
 
 
 
+" ### LaTeX
+
+ " From vim-latex documentation
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+
+
 " # Colors
 " -----------------------------------------------------------------------------
 
@@ -333,6 +360,13 @@ set t_ut=  " fixes background incompatibility between vim and tmux
 
 colorscheme cheerfully_dark
 " colorscheme cheerfully_light
+
+if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
+"  set t_8f=^[[38;2;%lu;%lu;%lum
+"  set t_8b=^[[48;2;%lu;%lu;%lum
+ set termguicolors
+endif
+
 
 " ## Mappings
 
@@ -447,7 +481,8 @@ nnoremap <S-l> gt
 " # Buffer management
 " -----------------------------------------------------------------------------
 
-
+" close all open buffers except the current one
+noremap <leader>cab :%bd\|e#<CR>
 
 
 " # Editing text
@@ -513,13 +548,14 @@ set foldnestmax=10      " 10 nested fold max
 " -----------------------------------------------------------------------------
 
 if has("autocmd")
-  " Hack to distinguish active windows from non-active ones
-  " It turns line numbers off for non-active windows.
-  augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set number
-    autocmd WinLeave * set nonumber
-  augroup END
+
+  " " Hack to distinguish active windows from non-active ones
+  " " It turns line numbers off for non-active windows.
+  " augroup BgHighlight
+  "   autocmd!
+  "   autocmd WinEnter * set number
+  "   autocmd WinLeave * set nonumber
+  " augroup END
 
 
   augroup vimrc
@@ -564,6 +600,24 @@ if has("autocmd")
     " shell in the vimrc changes the shell before loading pluggins, making
     " startup time EXTREMELY SLOW!
 
+    " disbale line breaks in  markdown
+    autocmd FileType markdown setlocal formatoptions-=t
+
+  augroup END
+
+  augroup Comments
+    autocmd FileType * let g:NERDDefaultAlign='left'
+    autocmd FileType dosini let g:NERDDefaultAlign='start'
+  augroup END
+
+  augroup LineNumbers
+    :autocmd FileType nerdtree set nonumber
+    :autocmd FileType taglist set nonumber
+  augroup END
+
+  augroup PythonCustomization
+    " highlight python self.
+    :autocmd FileType python syn match pythonStatement "\(\W\|^\)\@<=self\([\.,)]\)\@="
   augroup END
 
   " augroup autoformat_settings
@@ -576,7 +630,6 @@ if has("autocmd")
   "   autocmd FileType html,css,json AutoFormatBuffer js-beautify
   "   " autocmd FileType java AutoFormatBuffer google-java-format
   "   autocmd FileType python AutoFormatBuffer yapf
-  "   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
   " augroup END
 
 endif
@@ -649,17 +702,4 @@ function! Cheers()
     endif
     colorscheme cheerfully_dark
   endif
-endfunction
-
-" Formatter for python, a-la ClangFormat
-" powered by yapf (https://github.com/google/yapf)
-function! PythonFormat()
-  " echo "Running Python formatter!"
-
-  " Clear Syntastic warnings and errors
-  " this depends on Syntastic (I should run it only if preset)
-  execute ":SyntasticReset"
-
-  " actually run the formatting tool
-  execute ":0,$!yapf"
 endfunction
