@@ -12,7 +12,7 @@ This is a three step process:
 1. Clone this repo into `~/.vim`
 
 ```bash
- git clone git@github.com:jorgehatccrma/vimconfig.git ~/.vim
+git clone git@github.com:jorgehatccrma/vimconfig.git ~/.vim
 ```
 
 2. Point Vim to the `vimrc` file in this repo.

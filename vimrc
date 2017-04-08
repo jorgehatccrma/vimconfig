@@ -118,6 +118,16 @@ Plugin 'google/vim-glaive'
 " LaTeX
 Plugin 'vim-latex/vim-latex'
 
+" expanded targets and text objects. See
+" http://owen.cymru/vim-text-objects-extend-vims-natural-language-2/
+Plugin 'wellle/targets.vim'
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-function'
+Plugin 'kana/vim-textobj-indent'
+Plugin 'sgur/vim-textobj-parameter'
+Plugin 'bps/vim-textobj-python'
+
+
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -586,10 +596,10 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 
 " shortcuts to add/remove surrounding function (depends on vim-surround)
-" remove function when cursor in arguments
-nmap <Leader>raf ds(db
-" remove function when cursor function name
-nmap <Leader>rf diwlds(
+" delete function when cursor in arguments
+nmap <Leader>daf ds(db
+" delete function when cursor function name
+nmap <Leader>df diwds(
 " add function arround word
 nmap <Leader>af ysiw)i
 " add function arround visual selection
