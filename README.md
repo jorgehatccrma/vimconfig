@@ -25,21 +25,21 @@ This is a three step process:
    - Create a link to it:
 
     ```bash
-        ln -s ~/.vim/vimrc ~/.vimrc
+    ln -s ~/.vim/vimrc ~/.vimrc
     ```
 
    - Change your $MYVIMRC environment variable:
 
     ```bash
-        export MYVIMRC=~/.vim/vimrc
-    ```
+  export MYVIMRC=~/.vim/vimrc
+  ```
 
      (you could add this to your `~/.bash_profile`)
 
    - Create a `~/.vimrc` file with a single line in it:
 
     ```bash
-        echo "runtime vimrc" > .vimrc
+    echo "runtime vimrc" > .vimrc
     ```
 
      I personally don't like this one, as it breaks some of my config, but
