@@ -31,8 +31,8 @@ This is a three step process:
    - Change your $MYVIMRC environment variable:
 
     ```bash
-  export MYVIMRC=~/.vim/vimrc
-  ```
+    export MYVIMRC=~/.vim/vimrc
+    ```
 
      (you could add this to your `~/.bash_profile`)
 
