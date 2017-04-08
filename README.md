@@ -25,7 +25,7 @@ This is a three step process:
    - Create a link to it:
 
      ```bash
-    ln -s ~/.vim/vimrc ~/.vimrc
+        ln -s ~/.vim/vimrc ~/.vimrc
     ```
 
    - Change your $MYVIMRC environment variable:
@@ -47,7 +47,7 @@ This is a three step process:
 
 3. Launch Vim and Install plugins
 
-The first time you launch Vim, it should autmatically install
+The first time you launch Vim, it should automatically install
 [Vundle](https://github.com/VundleVim/Vundle.vim), which is the plugin manager
 of my choice. Only the manager is installed automatically. The plugins you need
 to install from within Vim with a single command:

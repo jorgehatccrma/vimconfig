@@ -28,6 +28,7 @@ let colors_name = "cheerfully_light"
 " light-blue   : 75
 " purple       : 99
 " gray         : 241
+" magenta      : 162
 
 
 
@@ -74,6 +75,12 @@ call cheerfully#SetHi("StatusLineNC",    { 'bg': 34, 'fg': 154, 'usenone': 1})
 call cheerfully#SetHi("SpellBad",        { 'bg': 125, 'fg': 230})
 call cheerfully#SetHi("SpellCap",        { 'bg': 208, 'fg': 232})
 call cheerfully#SetHi("MatchParen",      { 'bg': 214, 'fg': 241})
+
+" Special characters (the ones shown with `:set list`)
+" The "NonText" highlighting will be used for "eol", "extends" and
+" precedes".  "SpecialKey" for "nbsp", "tab" and "trail".
+call cheerfully#SetHi("SpecialKey",      { 'fg': 162})
+call cheerfully#SetHi("NonText",         { 'fg': 162})
 
 
 
@@ -167,7 +174,7 @@ hi   link      vimVar    Type
 
 " Markdown
 hi   link      htmlH1          Special
-call cheerfully#SetHi("mkdCode", {'bg': 237, 'fg': 94})
+call cheerfully#SetHi("mkdCode", {'bg': 253, 'fg': 28})
 
 " Javascript
 hi   link      jsGlobalObjects PreProc

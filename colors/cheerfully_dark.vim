@@ -28,6 +28,7 @@ let colors_name = "cheerfully_dark"
 " light-blue   : 81
 " purple       : 105
 " gray         : 246
+" magenta:     : 162
 
 
 
@@ -71,9 +72,16 @@ call cheerfully#SetHi("WildMenu",        { 'bg': 28, 'fg': 118, 'usenone': 1})
 call cheerfully#SetHi("StatusLine",      { 'bg': 22, 'fg': 249, 'usenone': 1})
 call cheerfully#SetHi("StatusLineNC",    { 'bg': 28, 'fg': 118, 'usenone': 1})
 
-call cheerfully#SetHi("SpellBad",        { 'bg': 125, 'fg': 230})
+" call cheerfully#SetHi("SpellBad",        { 'bg': 162, 'fg': 230})
+call cheerfully#SetHi("SpellBad",        { 'fg': 162})
 call cheerfully#SetHi("SpellCap",        { 'bg': 208, 'fg': 232})
 call cheerfully#SetHi("MatchParen",      { 'bg': 172, 'fg': 0})
+
+" Special characters (the ones shown with `:set list`)
+" The "NonText" highlighting will be used for "eol", "extends" and
+" precedes".  "SpecialKey" for "nbsp", "tab" and "trail".
+call cheerfully#SetHi("SpecialKey",      { 'fg': 162})
+call cheerfully#SetHi("NonText",         { 'fg': 162})
 
 
 

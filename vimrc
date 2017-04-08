@@ -19,7 +19,6 @@
 "
 " Must be first line !!!!
 set nocompatible   " disable Vi compatible mode (must be first line!!!)
-set timeoutlen=500 " max delay (ms) between multy key-stroke commands
 
 
 " ## OS specific stuff
@@ -40,10 +39,6 @@ let os = substitute(system('uname'), "\n", "", "")
 "  nnoremap <S-h> gT
 "  nnoremap <S-l> gt
 " endif
-
-
-
-
 
 
 " # Plugins
@@ -100,7 +95,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
 Plugin 'majutsushi/tagbar'
-" Plugin 'jiangmiao/auto-pairs'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'othree/html5-syntax.vim'
@@ -226,9 +220,12 @@ nmap <Leader>f :NERDTreeFind<CR>
 let g:vim_markdown_folding_disable = 1
 
 " ### Mardown preview
+
 " use grip (i.e. GitHub flavored markdown, I think)
 let g:vim_markdown_preview_github=1
 let g:vim_markdown_preview_hotkey='<C-m>'
+" let vim_markdown_preview_browser='Google Chrome'
+let vim_markdown_preview_browser='Opera'
 
 
 " ### NERDCommenter
@@ -245,7 +242,8 @@ let g:NERDDefaultAlign = 'left'
 
 " ### Syntastic
 let g:syntastic_enable_python_checker = 1
-let g:syntastic_python_checkers = ['pycodestyle', 'flake8']
+" let g:syntastic_python_checkers = ['pycodestyle', 'flake8']
+let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -284,6 +282,8 @@ let g:syntastic_html_tidy_ignore_errors= [
 let g:syntastic_quiet_messages = {
       \ "regex": ".*['.*'] is better written in dot notation."
       \}
+
+let g:flake8_ignore="E402,E501"
 
 
 " ### UltiSnips
@@ -352,6 +352,77 @@ let g:tex_flavor='latex'
 
 
 
+" # Basics
+
+" set timeoutlen=500 " max delay (ms) between multy key-stroke commands
+" Time out on key codes but not mappings.
+" Basically this makes terminal Vim work sanely.
+set notimeout
+set ttimeout
+set ttimeoutlen=100
+
+
+set wrap linebreak             " Soft wrapping without line breaks
+set encoding=utf-8             " Default encoding
+set backspace=indent,eol,start " Make backspace behave like other apps
+set autoread                   " Reload files written outside Vim
+
+" autoindent (see :help smartindent for more)
+set autoindent
+set smartindent
+set cindent
+
+" keep soft wrapping but prevent inserting line breaks on insert mode when
+" going over text width
+set formatoptions-=t
+
+" treat all numerals as decimal (otherwise, using <C-a> on 007 will yield 010,
+" as numbers preceeded by 0 are considered octal numbers
+set nrformats=
+
+" Make Vim able to edit crontab files again.
+set backupskip=/tmp/*,/private/tmp/*"
+
+" read the help for this one (currently experimenting with it)
+set ttyfast
+
+
+" ## Backup, undo and swap files
+
+set backup
+set noswapfile
+
+set undodir=~/.vim/tmp/undo//     " undo files
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap//   " swap files
+
+" Make those folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
+
+
+" ## Invisible chars
+
+set nolist  " don't display invisible characters in listchars
+
+" list of characters to show in list mode (:set list)
+set listchars=tab:▸\ ,eol:↵,extends:❯,precedes:❮
+
+set showbreak=↪\   " prefix wrapped lines with this character (see `:set wrap`)
+
+" toogle list chars (tabs, returns, etc.)
+nnoremap <Leader>hh :set list!<CR>
+
+
+
+
 " # Colors
 " -----------------------------------------------------------------------------
 
@@ -374,7 +445,7 @@ endif
 nmap <Leader>chd :colorscheme cheerfully_dark<CR>
 nmap <Leader>chl :colorscheme cheerfully_light<CR>
 
-" or more conviente, toggle between them
+" or more convenient, toggle between them
 nmap <Leader>c :call Cheers()<CR>
 
 
@@ -406,7 +477,6 @@ set number             " show line numbers
 set relativenumber     " display relaive numbers by default
 set cursorline         " always hightlight cursor line
 set foldcolumn=3       " show 3 fold levels in the gutter
-set wildmenu           " visual autocomplete for command menu
 " set lazyredraw         " redraw only when we need to.
 set showmatch          " highlight matching [{()}]
 set scrolloff=5        " number of context lines above and below the cursor
@@ -420,6 +490,30 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
 
 "nicer pane separators
 set fillchars=vert:│
+
+" ## Wildmenu
+
+set wildmenu           " visual autocomplete for command menu
+" set wildmode=list:longest
+" set wildmode=longest:full,full
+set wildmode=full
+
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+
+set wildignore+=*.luac                           " Lua byte code
+
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=__pycache__                      " Python cache
+
+set wildignore+=*.orig                           " Merge resolution files
+
 
 
 " ## Mappings
@@ -435,13 +529,11 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nmap <C-S-H> :call <SID>SynStack()<CR>
 
 " toggle line numbers
-nmap <leader>l :set nonumber!<CR>
+nmap <Leader>l :set nonumber!<CR>
 
-" remove surrounding spaces
-nmap [= F<space>xf<space>xh
+" toggle relative line numbers
+nmap <Leader>r :set relativenumber!<CR>
 
-" add surrouding spaces (depends on vim-surround)
-nmap ]= i<space><ESC>la<space><ESC>h
 
 " pretty print JSON file
 nmap <Leader>json :%!python -m json.tool<CR>
@@ -449,9 +541,6 @@ nmap <Leader>json :%!python -m json.tool<CR>
 " preserve selection when indenting with < & > keys
 vnoremap < <gv
 vnoremap > >gv
-
-" toggle relative line numbers
-nmap <Leader>r :set relativenumber!<CR>
 
 
 " # Tabs and splits
@@ -463,16 +552,16 @@ set splitbelow
 
 " ## Mappings
 
-nnoremap th    :tabprev<CR>
-nnoremap tj    :tabfirst<CR>
-nnoremap tk    :tablast<CR>
-nnoremap tl    :tabnext<CR>
-nnoremap tt    :tabedit<CR>
-nnoremap tm    :tabm<CR>
-nnoremap td    :tabclose<CR>
-nnoremap tn    :tabnew<CR>
-nnoremap <S-h> gT
-nnoremap <S-l> gt
+" nnoremap th    :tabprev<CR>
+" nnoremap tj    :tabfirst<CR>
+" nnoremap tk    :tablast<CR>
+" nnoremap tl    :tabnext<CR>
+" nnoremap tt    :tabedit<CR>
+" nnoremap tm    :tabm<CR>
+" nnoremap td    :tabclose<CR>
+" nnoremap tn    :tabnew<CR>
+" nnoremap <S-h> gT
+" nnoremap <S-l> gt
 
 
 
@@ -482,29 +571,37 @@ nnoremap <S-l> gt
 " -----------------------------------------------------------------------------
 
 " close all open buffers except the current one
-noremap <leader>cab :%bd\|e#<CR>
+noremap <Leader>cab :%bd\|e#<CR>
 
 
 " # Editing text
 " -----------------------------------------------------------------------------
 
-set wrap linebreak nolist      " Soft wrapping without line breaks
-set encoding=utf-8             " Default encoding
-set backspace=indent,eol,start " Make backspace behave like other apps
-set autoread                   " Reload files written outside Vim
+" Keep the cursor in place while joining lines
+nnoremap J mzJ`z
 
-" autoindent (see :help smartindent for more)
-set autoindent
-set smartindent
-set cindent
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
-" keep soft wrapping but prevent inserting line breaks on insert mode when
-" going over text width
-set formatoptions-=t
 
-" treat all numerals as decimal (otherwise, using <C-a> on 007 will yield 010,
-" as numbers preceeded by 0 are considered octal numbers
-set nrformats=
+" shortcuts to add/remove surrounding function (depends on vim-surround)
+" remove function when cursor in arguments
+nmap <Leader>raf ds(db
+" remove function when cursor function name
+nmap <Leader>rf diwlds(
+" add function arround word
+nmap <Leader>af ysiw)i
+" add function arround visual selection
+vmap <Leader>af S)i
+
+
+
+" # Saving files
+
+" Sudo to write
+cnoremap w!! w !sudo tee % >/dev/null
+
 
 
 " # Copy/Paste
@@ -513,24 +610,38 @@ set nrformats=
 " set clipboard=unnamed
 
 
-" ## Mappings
+" # Utils
 
 " Delete trailing whitespace
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " shortcut to write and execute current python file
-nmap <leader>xp :w \| :! python %<CR>
+nmap <Leader>xp :w \| :! python %<CR>
+
+" Source current line or visual selection
+vnoremap <leader>S y:@"<CR>
+nnoremap <leader>S ^vg_y:execute @@<cr>:echo 'Sourced line.'<cr>
 
 
 
-
-" # Searching
+" # Searching & Movements
 " -----------------------------------------------------------------------------
 
 set hlsearch             " highlight all seardh matches
 set incsearch            " search as characters are entered
 set ignorecase smartcase " case insensitive search
 
+" Easier to type, and I never use the default behavior.
+noremap H ^
+noremap L $
+vnoremap L g_
+
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" make jump to mark center in screen
+:map <expr> M printf('`%c zz',getchar())
 
 
 
@@ -566,6 +677,9 @@ if has("autocmd")
     "autocmd! bufwritepost vimrc source %
     "" autocmd! bufwritepost .vimrc source %
 
+    " Save when losing focus
+    autocmd FocusLost * :silent! wall
+
     " cmake file type
     autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
 
@@ -600,7 +714,7 @@ if has("autocmd")
     " shell in the vimrc changes the shell before loading pluggins, making
     " startup time EXTREMELY SLOW!
 
-    " disbale line breaks in  markdown
+    " disbale automatic line breaks in  markdown
     autocmd FileType markdown setlocal formatoptions-=t
 
   augroup END
@@ -616,8 +730,24 @@ if has("autocmd")
   augroup END
 
   augroup PythonCustomization
-    " highlight python self.
+    " highlight 'self.', 'self,', and 'self)'
     :autocmd FileType python syn match pythonStatement "\(\W\|^\)\@<=self\([\.,)]\)\@="
+    " highlight 'cls.', 'cls,', and 'cls)'
+    :autocmd FileType python syn match pythonStatement "\(\W\|^\)\@<=cls\([\.,)]\)\@="
+  augroup END
+
+  augroup LineReturn
+    " Make sure Vim returns to the same line when you reopen a file.
+    autocmd!
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zzzv' |
+        \ endif
+  augroup END
+
+  augroup SpellChecking
+    autocmd BufRead,BufNewFile *.md setlocal spell
+    autocmd FileType gitcommit setlocal spell
   augroup END
 
   " augroup autoformat_settings
@@ -685,12 +815,24 @@ endfunction
 " Helper function to display nicer folded text
 function! FoldText()
   let foldsize = (v:foldend - v:foldstart)
-  return getline(v:foldstart).' ('.foldsize.' lines)'
+  " return getline(v:foldstart).' ('.foldsize.' lines)'
+
+  let line = getline(v:foldstart)
+  let suffix = '(' . foldsize . ' lines) '
+
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth
+
+  let fillcharcount = windowwidth - len(line) - len(suffix)
+  " return line . '…' . repeat(" ",fillcharcount) . foldsize . '…' . ' '
+  return line . repeat(".",fillcharcount) . suffix
+
 endfunction
 
 
 " Toggle between the two cheerfully_* themes (dark/light)
 function! Cheers()
+  echom "CHEERS!"
   if g:colors_name ==# 'cheerfully_dark'
     if exists('g:airline_theme')
       let g:airline_theme = 'cheerfully_light'
