@@ -11,7 +11,7 @@ This is a three step process:
 
 1. Clone this repo into `~/.vim`
 
- ```bash
+```bash
  git clone git@github.com:jorgehatccrma/vimconfig.git ~/.vim
 ```
 
@@ -24,13 +24,13 @@ This is a three step process:
 
    - Create a link to it:
 
-     ```bash
+    ```bash
         ln -s ~/.vim/vimrc ~/.vimrc
     ```
 
    - Change your $MYVIMRC environment variable:
 
-     ```bash
+    ```bash
         export MYVIMRC=~/.vim/vimrc
     ```
 
@@ -38,7 +38,7 @@ This is a three step process:
 
    - Create a `~/.vimrc` file with a single line in it:
 
-     ```bash
+    ```bash
         echo "runtime vimrc" > .vimrc
     ```
 
