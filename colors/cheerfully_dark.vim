@@ -18,13 +18,13 @@ let colors_name = "cheerfully_dark"
 " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 " Palette reference (as cterm codes) - Try to stick to these colors
-" dark-green   : 28
+" dark-green   : 70
 " light-green  : 112
 " green        : 22
 " yellow       : 220
-" orange       : 172
+" orange       : 214
 " blue         : 39
-" red          : 160
+" red          : 196
 " light-blue   : 81
 " purple       : 105
 " gray         : 246
@@ -45,7 +45,7 @@ call cheerfully#SetHi("CursorLine",      { 'bg': 234, 'usenone': 1})
 call cheerfully#SetHi("CursorColumn",    { 'bg': 234})
 call cheerfully#SetHi("CursorLineNr",    { 'fg': 220})
 call cheerfully#SetHi("ColorColumn",     { 'bg': 235})
-call cheerfully#SetHi("Visual",          { 'bg': 28, 'fg': 15, 'usenone': 1})
+call cheerfully#SetHi("Visual",          { 'bg': 70, 'fg': 15, 'usenone': 1})
 
 " Gutter
 call cheerfully#SetHi("FoldColumn",      { 'bg': 0, 'fg': 244})
@@ -53,10 +53,10 @@ call cheerfully#SetHi("Folded",          { 'bg': 235, 'fg': 246})
 call cheerfully#SetHi("SignColumn",      { 'bg': 0, 'fg': 244})
 
 " Window / Tabs
-call cheerfully#SetHi("VertSplit",       { 'bg': 0, 'fg': 28, 'usenone': 1})
+call cheerfully#SetHi("VertSplit",       { 'bg': 0, 'fg': 70, 'usenone': 1})
 call cheerfully#SetHi("TabLine",         { 'bg': 22, 'fg': 254})
 call cheerfully#SetHi("TabLineFill",     { 'bg': 0, 'fg': 254, 'usenone': 1})
-call cheerfully#SetHi("TabLineSel",      { 'bg': 28, 'fg': 254})
+call cheerfully#SetHi("TabLineSel",      { 'bg': 70, 'fg': 254})
 
 " File Navigation / Searching
 call cheerfully#SetHi("Search",          { 'bg': 178, 'fg': 233})
@@ -68,14 +68,14 @@ call cheerfully#SetHi("Pmenu",           { 'bg': 246, 'fg': 0})
 call cheerfully#SetHi("PmenuSel",        { 'bg': 22, 'fg': 76})
 
 " Wildmenu/bufferline
-call cheerfully#SetHi("WildMenu",        { 'bg': 28, 'fg': 118, 'usenone': 1})
+call cheerfully#SetHi("WildMenu",        { 'bg': 70, 'fg': 118, 'usenone': 1})
 call cheerfully#SetHi("StatusLine",      { 'bg': 22, 'fg': 249, 'usenone': 1})
-call cheerfully#SetHi("StatusLineNC",    { 'bg': 28, 'fg': 118, 'usenone': 1})
+call cheerfully#SetHi("StatusLineNC",    { 'bg': 70, 'fg': 118, 'usenone': 1})
 
 " call cheerfully#SetHi("SpellBad",        { 'bg': 162, 'fg': 230})
 call cheerfully#SetHi("SpellBad",        { 'fg': 162})
 call cheerfully#SetHi("SpellCap",        { 'bg': 208, 'fg': 232})
-call cheerfully#SetHi("MatchParen",      { 'bg': 172, 'fg': 0})
+call cheerfully#SetHi("MatchParen",      { 'bg': 214, 'fg': 0})
 
 " Special characters (the ones shown with `:set list`)
 " The "NonText" highlighting will be used for "eol", "extends" and
@@ -94,17 +94,17 @@ call cheerfully#SetHi("NonText",         { 'fg': 162})
 call cheerfully#SetHi("Comment", {'fg': 67})
 
 call cheerfully#SetHi("Constant", {'fg': 163})
-call cheerfully#SetHi("String", {'fg': 172})
+call cheerfully#SetHi("String", {'fg': 214})
 hi   link   Character    String
 call cheerfully#SetHi("Float", {'fg': 39})
 hi   link   Number          Float
 hi   link   Boolean         Float
 
-call cheerfully#SetHi("Identifier", {'fg': 160})
+call cheerfully#SetHi("Identifier", {'fg': 196})
 " hi   link         Function        Identifier
 
 
-call cheerfully#SetHi("Statement", {'fg': 28})
+call cheerfully#SetHi("Statement", {'fg': 70})
 " cheerfully#SetHi("Conditional", {})
 " cheerfully#SetHi("Repeat", {})
 " cheerfully#SetHi("Label", {})

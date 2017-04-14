@@ -402,6 +402,11 @@ set ttyfast
 set backup
 set noswapfile
 
+" Persistent undo
+set undofile
+set undolevels=1000
+set undoreload=10000
+
 set undodir=~/.vim/tmp/undo//     " undo files
 set backupdir=~/.vim/tmp/backup// " backups
 set directory=~/.vim/tmp/swap//   " swap files
