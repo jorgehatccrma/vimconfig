@@ -153,6 +153,7 @@ highlight link SyntasticWarning SpellCap
 " ------------------------
 
 " Python
+call cheerfully#SetHi("pythonFunction", {'fg': 160, 'usenone': 1})
 hi  link pythonInclude    Type
 hi  link pythonStatement  Type
 hi  link pythonDecoratorName pythonDecorator

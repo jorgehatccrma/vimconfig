@@ -1,5 +1,16 @@
 " vim:foldmethod=expr:foldlevel=0:foldexpr=MDFold(v\:lnum):foldtext=FoldText()
 
+" Tips to navigate this file
+"
+" ----------+-----------------------------------
+" Command   |  Description
+" ----------+-----------------------------------
+"  zo       | Open fold under cursor
+"  zc       | Close fold under cursor
+"  zR       | Open all folds
+"  zM       | Close all folds
+"  :help zo | More help
+
 " # Preamble
 " -----------------------------------------------------------------------------
 
@@ -243,12 +254,12 @@ let g:NERDDefaultAlign = 'left'
 " let g:NERDDefaultAlign = 'start'
 
 " add extrace space after comment character, for every language
- let NERDSpaceDelims = 1
+let NERDSpaceDelims = 1
 
 " change comment character for .ini files
-" let g:NERDCustomDelimiters = {
-"     \ 'dosini': { 'left': '#'}
-" \ }
+let g:NERDCustomDelimiters = {
+    \ 'text': { 'left': '#'}
+\ }
 
 " ### Syntastic
 let g:syntastic_enable_python_checker = 1
@@ -339,6 +350,8 @@ let g:clang_format#command = 'clang-format-3.8'
 " detect a .clang-format
 let g:clang_format#detect_style_file = 1
 
+let g:javascript#command = 'js-beautify'
+
 
 " ### Indentation disaproval
 
@@ -395,6 +408,9 @@ set backupskip=/tmp/*,/private/tmp/*"
 
 " read the help for this one (currently experimenting with it)
 set ttyfast
+
+" use different ctags filenames
+set tags=./tags,./.tags,tags,.tags;
 
 
 " ## Backup, undo and swap files
@@ -605,9 +621,9 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 nmap <Leader>daf ds(db
 " delete function when cursor function name
 nmap <Leader>df diwds(
-" add function arround word
+" add function around word
 nmap <Leader>af ysiw)i
-" add function arround visual selection
+" add function around visual selection
 vmap <Leader>af S)i
 
 
@@ -740,6 +756,7 @@ if has("autocmd")
   augroup END
 
   augroup LineNumbers
+    autocmd!
     :autocmd FileType nerdtree set nonumber
     :autocmd FileType taglist set nonumber
   augroup END

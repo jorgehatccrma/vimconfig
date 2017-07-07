@@ -19,8 +19,8 @@ let colors_name = "cheerfully_dark"
 
 " Palette reference (as cterm codes) - Try to stick to these colors
 " dark-green   : 70
-" light-green  : 112
-" green        : 22
+" light-green  : 148
+" green        : 28
 " yellow       : 220
 " orange       : 214
 " blue         : 39
@@ -37,8 +37,8 @@ let colors_name = "cheerfully_dark"
 " ----------------------------------------------------------------------------
 
 " Edit window
-call cheerfully#SetHi("Normal",          { 'bg': 233, 'fg': 254})
-call cheerfully#SetHi("Cursor",          { 'bg':  34, 'fg': 254})
+call cheerfully#SetHi("Normal",          { 'bg': 233, 'fg': 255})
+call cheerfully#SetHi("Cursor",          { 'bg':  34, 'fg': 255})
 call cheerfully#SetHi("LineNr",          { 'bg':   0, 'fg': 244})
 call cheerfully#SetHi("EndOfBuffer",     { 'bg': 233, 'fg': 246})
 call cheerfully#SetHi("CursorLine",      { 'bg': 234, 'usenone': 1})
@@ -54,22 +54,22 @@ call cheerfully#SetHi("SignColumn",      { 'bg': 0, 'fg': 244})
 
 " Window / Tabs
 call cheerfully#SetHi("VertSplit",       { 'bg': 0, 'fg': 70, 'usenone': 1})
-call cheerfully#SetHi("TabLine",         { 'bg': 22, 'fg': 254})
-call cheerfully#SetHi("TabLineFill",     { 'bg': 0, 'fg': 254, 'usenone': 1})
-call cheerfully#SetHi("TabLineSel",      { 'bg': 70, 'fg': 254})
+call cheerfully#SetHi("TabLine",         { 'bg': 28, 'fg': 255})
+call cheerfully#SetHi("TabLineFill",     { 'bg': 0, 'fg': 255, 'usenone': 1})
+call cheerfully#SetHi("TabLineSel",      { 'bg': 70, 'fg': 255})
 
 " File Navigation / Searching
 call cheerfully#SetHi("Search",          { 'bg': 178, 'fg': 233})
-call cheerfully#SetHi("IncSearch",       { 'bg': 34, 'fg': 254})
+call cheerfully#SetHi("IncSearch",       { 'bg': 34, 'fg': 255})
 call cheerfully#SetHi("Directory",       { 'fg': 39, 'usenone': 1})
 
 " Autocomplete menu
 call cheerfully#SetHi("Pmenu",           { 'bg': 246, 'fg': 0})
-call cheerfully#SetHi("PmenuSel",        { 'bg': 22, 'fg': 76})
+call cheerfully#SetHi("PmenuSel",        { 'bg': 28, 'fg': 76})
 
 " Wildmenu/bufferline
 call cheerfully#SetHi("WildMenu",        { 'bg': 70, 'fg': 118, 'usenone': 1})
-call cheerfully#SetHi("StatusLine",      { 'bg': 22, 'fg': 249, 'usenone': 1})
+call cheerfully#SetHi("StatusLine",      { 'bg': 28, 'fg': 249, 'usenone': 1})
 call cheerfully#SetHi("StatusLineNC",    { 'bg': 70, 'fg': 118, 'usenone': 1})
 
 " call cheerfully#SetHi("SpellBad",        { 'bg': 162, 'fg': 230})
@@ -119,7 +119,7 @@ call cheerfully#SetHi("PreProc", {'fg': 220})
 " cheerfully#SetHi("Macro", {})
 " cheerfully#SetHi("PreCondit", {})
 
-call cheerfully#SetHi("Type", {'fg': 112})
+call cheerfully#SetHi("Type", {'fg': 148})
 " cheerfully#SetHi("StorageClass", {})
 " cheerfully#SetHi("Structure", {})
 " cheerfully#SetHi("Typedef", {})
@@ -154,6 +154,7 @@ highlight link SyntasticWarning SpellCap
 " ------------------------
 
 " Python
+call cheerfully#SetHi("pythonFunction", {'fg': 196, 'usenone': 1})
 hi  link pythonInclude    Type
 hi  link pythonStatement  Type
 hi  link pythonDecoratorName pythonDecorator
