@@ -127,7 +127,8 @@ Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
 
 " LaTeX
-Plugin 'vim-latex/vim-latex'
+Plugin 'lervag/vimtex'
+Plugin 'matze/vim-tex-fold'
 
 " expanded targets and text objects. See
 " http://owen.cymru/vim-text-objects-extend-vims-natural-language-2/
@@ -137,7 +138,10 @@ Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-indent'
 Plugin 'sgur/vim-textobj-parameter'
 Plugin 'bps/vim-textobj-python'
+Plugin 'libclang-vim/vim-textobj-clang'
 
+" Simple buffer explorer
+Plugin 'jeetsukumaran/vim-buffergator'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -261,6 +265,9 @@ let g:NERDCustomDelimiters = {
     \ 'text': { 'left': '#'}
 \ }
 
+" Hide certain files and folders
+let NERDTreeIgnore=['__pycache__$[[dir]]', '\.pyc$[[file]]']
+
 " ### Syntastic
 let g:syntastic_enable_python_checker = 1
 " let g:syntastic_python_checkers = ['pycodestyle', 'flake8']
@@ -362,16 +369,31 @@ let g:javascript#command = 'js-beautify'
 
 " ### LaTeX
 
- " From vim-latex documentation
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
+"  " From vim-latex documentation
+" " IMPORTANT: grep will sometimes skip displaying the file name if you
+" " search in a singe file. This will confuse Latex-Suite. Set your grep
+" " program to always generate a file-name.
+" set grepprg=grep\ -nH\ $*
 
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
+" " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" " The following changes the default filetype back to 'tex':
+" let g:tex_flavor='latex'
+
+
+" for vimtex
+let g:vimtex_compiler_latexmk = {
+      \ 'continuous' : 1,
+      \ 'executable' : 'latexmk',
+      \ 'options' : [
+      \   '-pdf',
+      \   '-verbose',
+      \   '-file-line-error',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \ ],
+      \}
+
 
 
 
