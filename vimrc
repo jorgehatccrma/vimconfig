@@ -143,6 +143,9 @@ Plugin 'libclang-vim/vim-textobj-clang'
 " Simple buffer explorer
 Plugin 'jeetsukumaran/vim-buffergator'
 
+" Plugin 'lepture/vim-jinja'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
