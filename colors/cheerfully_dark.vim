@@ -69,7 +69,8 @@ call cheerfully#SetHi("PmenuSel",        { 'bg': 28, 'fg': 76})
 
 " Wildmenu/bufferline
 call cheerfully#SetHi("WildMenu",        { 'bg': 70, 'fg': 118, 'usenone': 1})
-call cheerfully#SetHi("StatusLine",      { 'bg': 28, 'fg': 249, 'usenone': 1})
+" call cheerfully#SetHi("StatusLine",      { 'bg': 28, 'fg': 249, 'usenone': 1})
+call cheerfully#SetHi("StatusLine",      { 'bg': 0, 'fg': 70, 'usenone': 1})  " good idea to keep it similar to VertSplit
 call cheerfully#SetHi("StatusLineNC",    { 'bg': 70, 'fg': 118, 'usenone': 1})
 
 " call cheerfully#SetHi("SpellBad",        { 'bg': 162, 'fg': 230})

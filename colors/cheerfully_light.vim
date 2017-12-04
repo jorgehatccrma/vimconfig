@@ -69,7 +69,8 @@ call cheerfully#SetHi("PmenuSel",        { 'bg': 22, 'fg': 106})
 
 " Wildmenu/bufferline
 call cheerfully#SetHi("WildMenu",        { 'bg': 34, 'fg': 154, 'usenone': 1})
-call cheerfully#SetHi("StatusLine",      { 'bg': 28, 'fg': 251, 'usenone': 1})
+" call cheerfully#SetHi("StatusLine",      { 'bg': 28, 'fg': 251, 'usenone': 1})
+call cheerfully#SetHi("StatusLine",      { 'bg': 254, 'fg': 28, 'usenone': 1})
 call cheerfully#SetHi("StatusLineNC",    { 'bg': 34, 'fg': 154, 'usenone': 1})
 
 call cheerfully#SetHi("SpellBad",        { 'bg': 125, 'fg': 230})
