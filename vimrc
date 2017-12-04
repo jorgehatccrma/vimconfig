@@ -102,8 +102,9 @@ Plugin 'sirver/ultisnips'
 " Ultisnippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 Plugin 'JamshedVesuna/vim-markdown-preview'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'itchyny/lightline.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript'
@@ -193,45 +194,115 @@ filetype plugin indent on    " required
 "
 " ### Airline
 
+" set laststatus=2
+
+" let g:airline_powerline_fonts = 1
+" let g:airline_theme = 'cheerfully_dark'
+" " let g:airline_theme = 'cheerfully_light'
+" " let g:airline_theme = 'wombat'
+" " let g:airline_theme = 'murmur'
+" " let g:airline_theme = 'term'
+" " let g:airline_theme = 'badwolf'
+" let g:airline#extensions#bufferline#enabled = 0
+" let g:airline#extensions#bufferline#overwrite_variables = 0
+
+" if !exists('g:airline_symbols')
+"   let g:airline_symbols = {}
+" endif
+
+" " " unicode symbols
+" " let g:airline_left_sep = '»'
+" " let g:airline_left_sep = '▶'
+" " let g:airline_right_sep = '«'
+" " let g:airline_right_sep = '◀'
+" " let g:airline_symbols.linenr = '␊'
+" " let g:airline_symbols.linenr = '␤'
+" " let g:airline_symbols.linenr = '¶'
+" " let g:airline_symbols.branch = '⎇'
+" " let g:airline_symbols.paste = 'ρ'
+" " let g:airline_symbols.paste = 'Þ'
+" " let g:airline_symbols.paste = '∥'
+" " let g:airline_symbols.whitespace = 'Ξ'
+
+" " " airline symbols
+" " let g:airline_left_sep = ''
+" " let g:airline_left_alt_sep = ''
+" " let g:airline_right_sep = ''
+" " let g:airline_right_alt_sep = ''
+" " let g:airline_symbols.branch = ''
+" " let g:airline_symbols.readonly = ''
+" " let g:airline_symbols.linenr = ''
+
+
+" ### Lightline
+
+set noshowmode
 set laststatus=2
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'cheerfully_dark'
-" let g:airline_theme = 'cheerfully_light'
-" let g:airline_theme = 'wombat'
-" let g:airline_theme = 'murmur'
-" let g:airline_theme = 'term'
-" let g:airline_theme = 'badwolf'
-let g:airline#extensions#bufferline#enabled = 0
-let g:airline#extensions#bufferline#overwrite_variables = 0
+" \   'separator': { 'left': '', 'right': '' },
+" \   'subseparator': { 'left': '│', 'right': '│'},
+let g:lightline = {
+    \   'separator': { 'left': '', 'right': '' },
+    \   'subseparator': { 'left': '│', 'right': '│'},
+    \   'component_function': {
+    \     'filename': 'LightlineFilename',
+    \     'modified': 'LightlineModified',
+    \     'mode': 'LightlineMode',
+    \     'filetype': 'LightlineFiletype',
+    \     'fileencoding': 'LightlineFileencoding',
+    \     'fileformat': 'LightlineFileformat',
+    \   },
+    \   'active': {
+    \     'left': [['mode', 'paste'], [], ['readonly', 'filename']],
+    \     'right': [['modified'], ['filetype', 'fileencoding','fileformat', 'lineinfo']],
+    \   },
+    \   'inactive': {
+    \     'left': [[], [], ['filename']],
+    \     'right': [[], ['lineinfo']],
+    \   },
+    \   'tabline_separator': {
+    \     'left': '???',
+    \     'right': '!!!',
+    \   }
+    \ }
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
+function! LightlineFilename()
+  return winwidth(0) > 120 ? expand('%:p') : expand('%:t')
+endfunction
 
-" " unicode symbols
-" let g:airline_left_sep = '»'
-" let g:airline_left_sep = '▶'
-" let g:airline_right_sep = '«'
-" let g:airline_right_sep = '◀'
-" let g:airline_symbols.linenr = '␊'
-" let g:airline_symbols.linenr = '␤'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.branch = '⎇'
-" let g:airline_symbols.paste = 'ρ'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.paste = '∥'
-" let g:airline_symbols.whitespace = 'Ξ'
+function! LightlineModified()
+  return &mod ? '*' : ''
+endfunction
 
-" " airline symbols
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
+let s:special_filetypes = ['help', 'vundle', 'nerdtree', 'vim-minimap']
 
+function! LightlineMode()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
+  return lightline#mode()
+endfunction
+
+function! LightlineFiletype()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
+  return &ft !=# "" ? &ft : "no ft"
+endfunction
+
+function! LightlineFileencoding()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
+  return &fenc !=# "" ? &fenc : &enc
+endfunction
+
+function! LightlineFileformat()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
+  return &ff
+endfunction
 
 
 
@@ -254,6 +325,11 @@ let g:vim_markdown_preview_github=1
 let g:vim_markdown_preview_hotkey='<C-m>'
 " let vim_markdown_preview_browser='Google Chrome'
 let vim_markdown_preview_browser='Opera'
+
+
+" ### Minimap
+
+let g:minimap_toggle='<leader>mm'
 
 
 " ### NERDCommenter
@@ -485,8 +561,12 @@ nnoremap <Leader>hh :set list!<CR>
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 set t_ut=  " fixes background incompatibility between vim and tmux
 
+" general color theme
 colorscheme cheerfully_dark
 " colorscheme cheerfully_light
+
+" lightline color scheme
+let g:lightline.colorscheme = 'cheerfully_dark'
 
 if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
 "  set t_8f=^[[38;2;%lu;%lu;%lum
@@ -746,6 +826,9 @@ if has("autocmd")
     autocmd FileType python setlocal sw=4 ts=4 sts=4 expandtab
     autocmd FileType javascript setlocal ts=2 sts=2 sw=2 noexpandtab
     autocmd FileType cmake setlocal sw=4 ts=4 sts=4 expandtab
+    autocmd FileType sql setlocal sw=4 ts=4 sts=4 expandtab
+
+    autocmd BufNewFile,BufRead,BufEnter *.tsv setlocal autoindent noexpandtab tabstop=8 shiftwidth=8 sts=8 list nowrap
 
     " provide larger context for syntax highlighting (useful for html
     " files with javascript in them)
