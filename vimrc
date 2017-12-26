@@ -144,7 +144,6 @@ Plugin 'libclang-vim/vim-textobj-clang'
 " Simple buffer explorer
 Plugin 'jeetsukumaran/vim-buffergator'
 
-" Plugin 'lepture/vim-jinja'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -362,7 +361,10 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_mode_map = {
       \ "mode": "active",
-      \ "passive_filetypes": ["cpp", "c", "hpp", "h"] }
+      \ "passive_filetypes": [
+            \ "cpp", "c",
+            \ "hpp", "h",
+            \ ] }
 
 " see https://github.com/jasonlong/dotfiles/blob/master/vimrc for more ignores
 let g:syntastic_html_tidy_ignore_errors = [
@@ -407,6 +409,16 @@ let g:ultisnips_python_style = "google"
 " custom highlight groups to ingrate with vim-airline/theme/cheerfully*
 let g:bufferline_active_highlight = 'ActiveBuffer'
 let g:bufferline_inactive_highlight = 'InactiveBuffer'
+
+
+
+" ### Buffergator
+
+" Remove buffergator key mappings
+let g:buffergator_suppress_keymaps = 1
+
+" replace buffer gator's default Open mapping with Toggle
+map <Leader>b :BuffergatorToggle<CR>
 
 
 
@@ -845,6 +857,9 @@ if has("autocmd")
 
     " fixes .pig syntax highlighting
     autocmd BufEnter *.pig :set syntax=pig
+
+    " use jinja fitle type for html files
+    autocmd BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=htmldjango
 
     " make the shell a login shell
     autocmd VimEnter * :set shell=bash\ -l
