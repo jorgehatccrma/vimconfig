@@ -145,6 +145,7 @@ Plugin 'libclang-vim/vim-textobj-clang'
 Plugin 'jeetsukumaran/vim-buffergator'
 
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'wavded/vim-stylus'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -392,7 +393,9 @@ let g:syntastic_quiet_messages = {
       \ "regex": ".*['.*'] is better written in dot notation."
       \}
 
+
 let g:flake8_ignore="E402,E501"
+
 
 
 " ### UltiSnips
@@ -641,10 +644,11 @@ set fillchars=vert:│
 
 " ## Wildmenu
 
-set wildmenu           " visual autocomplete for command menu
 " set wildmode=list:longest
 " set wildmode=longest:full,full
-set wildmode=full
+" set wildmode=full
+set wildmode=longest:full
+set wildmenu           " visual autocomplete for command menu
 
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
