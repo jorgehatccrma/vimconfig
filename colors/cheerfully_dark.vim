@@ -53,7 +53,11 @@ call cheerfully#SetHi("Folded",          { 'bg': 235, 'fg': 246})
 call cheerfully#SetHi("SignColumn",      { 'bg': 0, 'fg': 244})
 
 " Window / Tabs
+" NeoVim has a reversed interpretation of BG and FG than vim
 call cheerfully#SetHi("VertSplit",       { 'bg': 0, 'fg': 70, 'usenone': 1})
+if has('nvim')
+  call cheerfully#SetHi("VertSplit",       { 'bg': 70, 'fg': 0, 'usenone': 1})
+endif
 call cheerfully#SetHi("TabLine",         { 'bg': 28, 'fg': 255})
 call cheerfully#SetHi("TabLineFill",     { 'bg': 0, 'fg': 255, 'usenone': 1})
 call cheerfully#SetHi("TabLineSel",      { 'bg': 70, 'fg': 255})

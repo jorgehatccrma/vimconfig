@@ -75,7 +75,7 @@ let g:cheerfully#colorlist = {
 " Uses g:cheerfully#colorlist to also set the gui versions.
 "
 " Args:
-"   group: highligh group name
+"   group: highlight group name
 "   values: dictionary of the form {'fg': <int>, 'bg': <int>, 'usenone': 1}
 "     where all the keys are optional. If a key is present, the corresponding
 "     highlight color is set ('fg' stands for 'foregoround' and 'bg' for

@@ -323,8 +323,8 @@ let g:vim_markdown_folding_disable = 1
 " use grip (i.e. GitHub flavored markdown, I think)
 let g:vim_markdown_preview_github=1
 let g:vim_markdown_preview_hotkey='<C-m>'
-" let vim_markdown_preview_browser='Google Chrome'
-let vim_markdown_preview_browser='Opera'
+let vim_markdown_preview_browser='Google Chrome'
+" let vim_markdown_preview_browser='Opera'
 
 
 " ### Minimap
@@ -490,6 +490,12 @@ let g:vimtex_compiler_latexmk = {
 
 
 
+" ### Goyo
+
+" changing from the default 80
+let g:goyo_width = 100
+
+
 
 " # Basics
 
@@ -631,6 +637,10 @@ set foldcolumn=3       " show 3 fold levels in the gutter
 " set lazyredraw         " redraw only when we need to.
 set showmatch          " highlight matching [{()}]
 set scrolloff=5        " number of context lines above and below the cursor
+if !has('nvim')
+  set ttymouse=sgr       " to allow mouse to resize panels
+  let g:python2_host_prog = '/usr/local/bin/python'
+endif
 
 match ErrorMsg '\s\+$' " Highlight trailing whitespace
 
@@ -909,7 +919,7 @@ if has("autocmd")
     autocmd FileType gitcommit setlocal spell
   augroup END
 
-  " augroup autoformat_settings
+  augroup autoformat_settings
   "   " autocmd FileType bzl AutoFormatBuffer buildifier
   "   " autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
   "   autocmd FileType proto,javascript AutoFormatBuffer clang-format
@@ -919,7 +929,11 @@ if has("autocmd")
   "   autocmd FileType html,css,json AutoFormatBuffer js-beautify
   "   " autocmd FileType java AutoFormatBuffer google-java-format
   "   autocmd FileType python AutoFormatBuffer yapf
-  " augroup END
+    " the next line depends on https://github.com/darold/pgFormatter
+    " ... mmmmm, doesn't work cause pg_format is not a valid vim-codefmt
+    " formatter. As a hacky solution you can do `:!pg_format %`
+    " autocmd FileType sql AutoFormatBuffer pg_format
+  augroup END
 
 endif
 
