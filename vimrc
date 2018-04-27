@@ -110,7 +110,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'othree/html5-syntax.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'motus/pig.vim'
 Plugin 'danro/rename.vim'
 Plugin 'rhysd/vim-clang-format'
@@ -146,6 +146,17 @@ Plugin 'jeetsukumaran/vim-buffergator'
 
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'wavded/vim-stylus'
+
+" Neo4j / Cypher
+Plugin 'neo4j-contrib/cypher-vim-syntax'
+
+" CSS
+Plugin 'ap/vim-css-color'
+
+" File coloring
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plugin 'ryanoasis/vim-devicons'
+
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -267,7 +278,9 @@ let g:lightline = {
     \ }
 
 function! LightlineFilename()
-  return winwidth(0) > 120 ? expand('%:p') : expand('%:t')
+  let fname = winwidth(0) > 120 ? expand('%:p') : expand('%:t')
+  let nr = bufnr('')
+  return nr . ":" . fname
 endfunction
 
 function! LightlineModified()
@@ -407,6 +420,7 @@ let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 let g:ultisnips_python_style = "google"
 
 
+
 " ### Bufferline
 
 " custom highlight groups to ingrate with vim-airline/theme/cheerfully*
@@ -494,6 +508,27 @@ let g:vimtex_compiler_latexmk = {
 
 " changing from the default 80
 let g:goyo_width = 100
+
+
+" ### VimTex
+
+if has('nvim')
+  let g:vimtex_compiler_progname='nvr'
+end
+
+" ### NerdTreeSyntax Highlight
+
+" highlight full name (not only icons, which I'm not currently using)
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+
+" add new file extensions/change existing color mappings
+let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExactMatchHighlightColor['.gitignore'] = "999999"
+
+let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreePatternMatchHighlightColor['.*\.tfrecords$'] = "3F51B5"
 
 
 
@@ -630,8 +665,8 @@ syntax enable          " enable syntax highlighting
 set colorcolumn=80     " visible mark at 80 characters
 set textwidth=80       " define text width
 set mouse=a            " Mouse on in every mode
-set number             " show line numbers
 set relativenumber     " display relaive numbers by default
+set number             " show line numbers
 set cursorline         " always hightlight cursor line
 set foldcolumn=3       " show 3 fold levels in the gutter
 " set lazyredraw         " redraw only when we need to.
@@ -757,6 +792,13 @@ nmap <Leader>af ysiw)i
 " add function around visual selection
 vmap <Leader>af S)i
 
+
+" sane placement of the cursort for p and P
+" (see https://unix.stackexchange.com/a/5061/151275)
+noremap p gp
+noremap P gP
+noremap gp p
+noremap gP P
 
 
 " # Saving files
