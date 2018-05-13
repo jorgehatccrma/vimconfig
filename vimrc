@@ -88,7 +88,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/syntastic'
+" Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'gerw/vim-HiLinkTrace'
 Plugin 'tpope/vim-unimpaired'
@@ -157,6 +158,8 @@ Plugin 'ap/vim-css-color'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plugin 'ryanoasis/vim-devicons'
 
+" TOML syntax
+Plugin 'cespare/vim-toml'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -363,7 +366,9 @@ let NERDTreeIgnore=['__pycache__$[[dir]]', '\.pyc$[[file]]']
 " ### Syntastic
 let g:syntastic_enable_python_checker = 1
 " let g:syntastic_python_checkers = ['pycodestyle', 'flake8']
-let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['pylint', 'flake8']
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -409,6 +414,24 @@ let g:syntastic_quiet_messages = {
 
 let g:flake8_ignore="E402,E501"
 
+
+
+" ### ALE
+
+" Specify linters for specific languages (other languages will use all availbale
+" linters
+" let g:ale_linters = { 'python': ['flake8', ], }
+let g:ale_linters = { 'python': ['pylint', 'flake8'], }
+" let g:ale_fixers = { 'python': ['yapf', ], }
+let g:ale_fixers = { 'python': ['yapf', 'autopep8'], }
+
+" Better message format
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %code:% %s [%severity%]'
+
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
 
 
 " ### UltiSnips
@@ -530,7 +553,8 @@ let g:NERDTreeExactMatchHighlightColor['.gitignore'] = "999999"
 let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
 let g:NERDTreePatternMatchHighlightColor['.*\.tfrecords$'] = "3F51B5"
 
-
+let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreePatternMatchHighlightColor['.*\.sh$'] = "EA80FC"
 
 " # Basics
 
@@ -568,6 +592,7 @@ set ttyfast
 
 " use different ctags filenames
 set tags=./tags,./.tags,tags,.tags;
+
 
 
 " ## Backup, undo and swap files
@@ -924,7 +949,7 @@ if has("autocmd")
     " shell in the vimrc changes the shell before loading pluggins, making
     " startup time EXTREMELY SLOW!
 
-    " disbale automatic line breaks in  markdown
+    " disable automatic line breaks in  markdown
     autocmd FileType markdown setlocal formatoptions-=t
 
   augroup END

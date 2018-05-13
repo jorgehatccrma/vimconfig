@@ -11,3 +11,21 @@ snippet utf8
 # -*- coding: utf-8 -*-
 
 endsnippet
+
+snippet arg
+${2:parser}.add_argument(
+	'--${1:flag}',
+	help='${2:description}',
+	type=${3:str},
+	default=${4:None},
+)
+endsnippet
+
+snippet parsearg
+def ${1:parse_args}():
+	parser = argparse.ArgumentParser(
+		description="${2:description}",
+	)
+	# Since you are using this UltiSnippet, you might want to type `arg<TAB>`
+	# bellow, to add arguments
+endsnippet

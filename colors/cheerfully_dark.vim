@@ -88,6 +88,8 @@ call cheerfully#SetHi("MatchParen",      { 'bg': 214, 'fg': 0})
 call cheerfully#SetHi("SpecialKey",      { 'fg': 162})
 call cheerfully#SetHi("NonText",         { 'fg': 162})
 
+" NERDTree customizations
+call cheerfully#SetHi("nerdtreeFileExtensionLabel_sh", { 'fg': 214})
 
 
 " ----------------------------------------------------------------------------
