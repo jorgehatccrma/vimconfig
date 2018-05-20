@@ -156,7 +156,7 @@ Plugin 'ap/vim-css-color'
 
 " File coloring
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plugin 'ryanoasis/vim-devicons'
+Plugin 'ryanoasis/vim-devicons'
 
 " TOML syntax
 Plugin 'cespare/vim-toml'
@@ -430,8 +430,21 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code:% %s [%severity%]'
 
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
+" let g:ale_sign_error = ''
+let g:ale_sign_error = ''
+" let g:ale_sign_error = ''
+" let g:ale_sign_error = '✗'
+" let g:ale_sign_error = ''
+" let g:ale_sign_warning = ''
+" let g:ale_sign_warning = ''
+" let g:ale_sign_warning = ''
+" let g:ale_sign_warning = ''
+let g:ale_sign_warning = ''
+" let g:ale_sign_warning = ''
+" let g:ale_sign_warning = 'ﬤ'
+" let g:ale_sign_warning = ''
+" let g:ale_sign_warning = ''
+" let g:ale_sign_warning = '⚠'
 
 
 " ### UltiSnips
@@ -659,11 +672,11 @@ endif
 " ## Mappings
 
 " dark/light color scheme
-nmap <Leader>chd :colorscheme cheerfully_dark<CR>
-nmap <Leader>chl :colorscheme cheerfully_light<CR>
+" nmap <Leader>chd :colorscheme cheerfully_dark<CR>
+" nmap <Leader>chl :colorscheme cheerfully_light<CR>
 
 " or more convenient, toggle between them
-nmap <Leader>c :call Cheers()<CR>
+nmap <Leader>C :call Cheers()<CR>
 
 
 " # Spaces And Tabs
@@ -817,8 +830,13 @@ nmap <Leader>af ysiw)i
 " add function around visual selection
 vmap <Leader>af S)i
 
+" shortcuts to add/remove surrounding dict (depends on vim-surround)
+" delete dict when cursor in key (thanks to Tim O'Brien)
+nmap <Leader>dad ds'ds[db
+" add dict around word
+nmap <Leader>ad ysiw]lysiw'hi
 
-" sane placement of the cursort for p and P
+" sane placement of the cursor for p and P
 " (see https://unix.stackexchange.com/a/5061/151275)
 noremap p gp
 noremap P gP
