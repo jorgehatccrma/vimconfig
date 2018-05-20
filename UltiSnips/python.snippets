@@ -12,15 +12,6 @@ snippet utf8
 
 endsnippet
 
-snippet arg
-${2:parser}.add_argument(
-	'--${1:flag}',
-	help='${2:description}',
-	type=${3:str},
-	default=${4:None},
-)
-endsnippet
-
 snippet parsearg
 def ${1:parse_args}():
 	parser = argparse.ArgumentParser(
@@ -28,4 +19,42 @@ def ${1:parse_args}():
 	)
 	# Since you are using this UltiSnippet, you might want to type `arg<TAB>`
 	# bellow, to add arguments
+endsnippet
+
+snippet arg
+${5:parser}.add_argument(
+	'--${1:flag}',
+	help='${2:description}',
+	type=${3:str},
+	default=${4:None},
+)
+endsnippet
+
+snippet boolarg
+${5:parser}.add_argument(
+	'--${1:flag}',
+	help='${2:description}',
+	action='${3:store_true}',
+	default=${4:False},
+)
+endsnippet
+
+snippet noboolarg
+${5:parser}.add_argument(
+	'--no-${1:flag}',
+	help='${2:description}',
+	action='${3:store_false}',
+	default=${4:True},
+	dest='$1',
+)
+endsnippet
+
+snippet trace
+import pdb
+pdb.set_trace()
+endsnippet
+
+snippet itrace
+import ipdb
+ipdb.set_trace()
 endsnippet
