@@ -1,7 +1,8 @@
 " vim:foldmethod=expr:foldlevel=0:foldexpr=MDFold(v\:lnum):foldtext=FoldText()
 
 " Tips to navigate this file
-"
+" -----------------------------------------------------------------------------
+
 " ----------+-----------------------------------
 " Command   |  Description
 " ----------+-----------------------------------
@@ -55,141 +56,114 @@ let os = substitute(system('uname'), "\n", "", "")
 " # Plugins
 " -----------------------------------------------------------------------------
 
-" Install Vundle if not installed (adapted from
-" http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/ )
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme)
-  echo "Installing Vundle.."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
-  let iCanHazVundle=0
+" Install vim-plug if not present
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" vim-plug will handle plugins
+call plug#begin('~/.vim/bundle')
 
-filetype off                  " required for Vundle
+" To access help for vim-plug itself
+Plug 'junegunn/vim-plug'
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-" Plugin 'vim-syntastic/syntastic'
-Plugin 'w0rp/ale'
-Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'gerw/vim-HiLinkTrace'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'honza/dockerfile.vim'
-Plugin 'junegunn/goyo.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-obsession'
-Plugin 'severin-lemaignan/vim-minimap'
-Plugin 'sirver/ultisnips'
+" Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
+Plug 'scrooloose/nerdcommenter'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+" Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'gerw/vim-HiLinkTrace'
+Plug 'tpope/vim-unimpaired'
+Plug 'honza/dockerfile.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-obsession'
+Plug 'severin-lemaignan/vim-minimap'
+Plug 'sirver/ultisnips'
 " Ultisnippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-Plugin 'JamshedVesuna/vim-markdown-preview'
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
-Plugin 'itchyny/lightline.vim'
-Plugin 'bling/vim-bufferline'
-Plugin 'majutsushi/tagbar'
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/html5.vim'
-Plugin 'othree/html5-syntax.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'motus/pig.vim'
-Plugin 'danro/rename.vim'
-Plugin 'rhysd/vim-clang-format'
-Plugin 'moll/vim-node'
-" Plugin 'wookiehangover/jshint.vim'
-" Plugin 'walm/jshint.vim'
-" Plugin 'Shutnik/jshint2.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'fatih/vim-go'
-" Plugin 'dodie/vim-disapprove-deep-indentation'
+Plug 'honza/vim-snippets'
+Plug 'JamshedVesuna/vim-markdown-preview'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+Plug 'bling/vim-bufferline'
+Plug 'majutsushi/tagbar'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/html5.vim'
+Plug 'othree/html5-syntax.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'motus/pig.vim'
+Plug 'danro/rename.vim'
+Plug 'rhysd/vim-clang-format'
+Plug 'moll/vim-node'
+" Plug 'wookiehangover/jshint.vim'
+" Plug 'walm/jshint.vim'
+" Plug 'Shutnik/jshint2.vim'
+Plug 'mxw/vim-jsx'
+Plug 'fatih/vim-go'
+" Plug 'dodie/vim-disapprove-deep-indentation'
 
 " Google's code formatting tools
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-codefmt'
-Plugin 'google/vim-glaive'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 " LaTeX
-Plugin 'lervag/vimtex'
-Plugin 'matze/vim-tex-fold'
+Plug 'lervag/vimtex'
+Plug 'matze/vim-tex-fold'
 
 " expanded targets and text objects. See
 " http://owen.cymru/vim-text-objects-extend-vims-natural-language-2/
-Plugin 'wellle/targets.vim'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kana/vim-textobj-function'
-Plugin 'kana/vim-textobj-indent'
-Plugin 'sgur/vim-textobj-parameter'
-Plugin 'bps/vim-textobj-python'
-Plugin 'libclang-vim/vim-textobj-clang'
+Plug 'wellle/targets.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-function'
+Plug 'kana/vim-textobj-indent'
+Plug 'sgur/vim-textobj-parameter'
+Plug 'bps/vim-textobj-python'
+Plug 'libclang-vim/vim-textobj-clang'
 
 " Simple buffer explorer
-Plugin 'jeetsukumaran/vim-buffergator'
+Plug 'jeetsukumaran/vim-buffergator'
 
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'wavded/vim-stylus'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'wavded/vim-stylus'
 
 " Neo4j / Cypher
-Plugin 'neo4j-contrib/cypher-vim-syntax'
+Plug 'neo4j-contrib/cypher-vim-syntax'
 
 " CSS
-Plugin 'ap/vim-css-color'
+Plug 'ap/vim-css-color'
 
 " File coloring
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
+Plug 'ryanoasis/vim-devicons', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
 
 " TOML syntax
-Plugin 'cespare/vim-toml'
+Plug 'cespare/vim-toml'
 
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+" " Brief help
+" " :PlugList       - lists configured plugins
+" " :PlugInstall    - installs plugins; append `!` to update or just
+" " :PlugUpdate
+" " :PlugSearch foo - searches for foo; append `!` to refresh local cache
+" " :PlugClean      - confirms removal of unused plugins; append `!` to
+" " auto-approve removal
+" "
+" " see :h vundle for more details or wiki for FAQ
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to
-" auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" vim-plug surrenders control now
+call plug#end()
+
+
+" " Put your non-Plugin stuff after this line
+
+
 
 
 
