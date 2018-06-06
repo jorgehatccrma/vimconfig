@@ -92,6 +92,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'bling/vim-bufferline'
 Plug 'majutsushi/tagbar'
 Plug 'pangloss/vim-javascript'
@@ -147,6 +148,11 @@ Plug 'ryanoasis/vim-devicons', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Lo
 " TOML syntax
 Plug 'cespare/vim-toml'
 
+" Visualize undo tree
+Plug 'mbbill/undotree'
+" Plug 'simnalamburt/vim-mundo'
+
+
 " " Brief help
 " " :PlugList       - lists configured plugins
 " " :PlugInstall    - installs plugins; append `!` to update or just
@@ -180,122 +186,6 @@ call plug#end()
 " call Pl#Theme#RemoveSegment('fileformat')
 
 "
-" ### Airline
-
-" set laststatus=2
-
-" let g:airline_powerline_fonts = 1
-" let g:airline_theme = 'cheerfully_dark'
-" " let g:airline_theme = 'cheerfully_light'
-" " let g:airline_theme = 'wombat'
-" " let g:airline_theme = 'murmur'
-" " let g:airline_theme = 'term'
-" " let g:airline_theme = 'badwolf'
-" let g:airline#extensions#bufferline#enabled = 0
-" let g:airline#extensions#bufferline#overwrite_variables = 0
-
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-
-" " " unicode symbols
-" " let g:airline_left_sep = '»'
-" " let g:airline_left_sep = '▶'
-" " let g:airline_right_sep = '«'
-" " let g:airline_right_sep = '◀'
-" " let g:airline_symbols.linenr = '␊'
-" " let g:airline_symbols.linenr = '␤'
-" " let g:airline_symbols.linenr = '¶'
-" " let g:airline_symbols.branch = '⎇'
-" " let g:airline_symbols.paste = 'ρ'
-" " let g:airline_symbols.paste = 'Þ'
-" " let g:airline_symbols.paste = '∥'
-" " let g:airline_symbols.whitespace = 'Ξ'
-
-" " " airline symbols
-" " let g:airline_left_sep = ''
-" " let g:airline_left_alt_sep = ''
-" " let g:airline_right_sep = ''
-" " let g:airline_right_alt_sep = ''
-" " let g:airline_symbols.branch = ''
-" " let g:airline_symbols.readonly = ''
-" " let g:airline_symbols.linenr = ''
-
-
-" ### Lightline
-
-set noshowmode
-set laststatus=2
-
-" \   'separator': { 'left': '', 'right': '' },
-" \   'subseparator': { 'left': '│', 'right': '│'},
-let g:lightline = {
-    \   'separator': { 'left': '', 'right': '' },
-    \   'subseparator': { 'left': '│', 'right': '│'},
-    \   'component_function': {
-    \     'filename': 'LightlineFilename',
-    \     'modified': 'LightlineModified',
-    \     'mode': 'LightlineMode',
-    \     'filetype': 'LightlineFiletype',
-    \     'fileencoding': 'LightlineFileencoding',
-    \     'fileformat': 'LightlineFileformat',
-    \   },
-    \   'active': {
-    \     'left': [['mode', 'paste'], [], ['readonly', 'filename']],
-    \     'right': [['modified'], ['filetype', 'fileencoding','fileformat', 'lineinfo']],
-    \   },
-    \   'inactive': {
-    \     'left': [[], [], ['filename']],
-    \     'right': [[], ['lineinfo']],
-    \   },
-    \   'tabline_separator': {
-    \     'left': '???',
-    \     'right': '!!!',
-    \   }
-    \ }
-
-function! LightlineFilename()
-  let fname = winwidth(0) > 120 ? expand('%:p') : expand('%:t')
-  let nr = bufnr('')
-  return nr . ":" . fname
-endfunction
-
-function! LightlineModified()
-  return &mod ? '*' : ''
-endfunction
-
-let s:special_filetypes = ['help', 'vundle', 'nerdtree', 'vim-minimap']
-
-function! LightlineMode()
-  if index(s:special_filetypes, &filetype) >= 0
-    return ''
-  endif
-  return lightline#mode()
-endfunction
-
-function! LightlineFiletype()
-  if index(s:special_filetypes, &filetype) >= 0
-    return ''
-  endif
-  return &ft !=# "" ? &ft : "no ft"
-endfunction
-
-function! LightlineFileencoding()
-  if index(s:special_filetypes, &filetype) >= 0
-    return ''
-  endif
-  return &fenc !=# "" ? &fenc : &enc
-endfunction
-
-function! LightlineFileformat()
-  if index(s:special_filetypes, &filetype) >= 0
-    return ''
-  endif
-  return &ff
-endfunction
-
-
-
 " ### NERDTree
 
 " file browser mapped to \p
@@ -331,7 +221,8 @@ let NERDSpaceDelims = 1
 
 " change comment character for .ini files
 let g:NERDCustomDelimiters = {
-    \ 'text': { 'left': '#'}
+    \ 'text': { 'left': '#'},
+    \ 'python': { 'left': '#', 'leftAlt': '#' },
 \ }
 
 " Hide certain files and folders
@@ -399,6 +290,8 @@ let g:ale_linters = { 'python': ['pylint', 'flake8'], }
 " let g:ale_fixers = { 'python': ['yapf', ], }
 let g:ale_fixers = { 'python': ['yapf', 'autopep8'], }
 
+let g:ale_fixers['json'] = ['fixjson']
+
 " Better message format
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -419,6 +312,117 @@ let g:ale_sign_warning = ''
 " let g:ale_sign_warning = ''
 " let g:ale_sign_warning = ''
 " let g:ale_sign_warning = '⚠'
+
+
+" ### Lightline
+
+set noshowmode
+set laststatus=2
+
+" \   'separator': { 'left': '', 'right': '' },
+" \   'subseparator': { 'left': '│', 'right': '│'},
+let g:lightline = {
+    \   'colorscheme': 'wombat',
+    \   'separator': { 'left': '', 'right': '' },
+    \   'subseparator': { 'left': '│', 'right': '│'},
+    \   'component_function': {
+    \     'filename': 'LightlineFilename',
+    \     'modified': 'LightlineModified',
+    \     'mode': 'LightlineMode',
+    \     'filetype': 'LightlineFiletype',
+    \     'fileencoding': 'LightlineFileencoding',
+    \     'fileformat': 'LightlineFileformat',
+    \   },
+    \   'active': {
+    \     'left': [
+    \       ['mode', 'paste'],
+    \       ['readonly', 'filename'],
+    \       ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+    \     ],
+    \     'right': [
+    \       ['modified'],
+    \       ['filetype', 'fileencoding','fileformat', 'lineinfo']
+    \     ],
+    \   },
+    \   'inactive': {
+    \     'left': [[], ['filename']],
+    \     'right': [[], ['lineinfo']],
+    \   },
+    \   'tabline_separator': {
+    \     'left': '???',
+    \     'right': '!!!',
+    \   }
+    \ }
+
+" Adding ALE to lightline via lightline-ale plugin
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'ALEchecking',
+      \     'linter_warnings': 'ALEwarning',
+      \     'linter_errors': 'ALEerror',
+      \     'linter_ok': 'ALEok',
+      \ }
+
+" Use FontAwesome icons
+" let g:lightline#ale#indicator_warnings = "\uf071"
+" let g:lightline#ale#indicator_errors = "\uf05e"
+" let g:lightline#ale#indicator_ok = "\uf00c"
+" let g:lightline#ale#indicator_checking = "\uf110"
+
+let g:lightline#ale#indicator_warnings = ''
+let g:lightline#ale#indicator_errors = ''
+let g:lightline#ale#indicator_ok = ""
+" let g:lightline#ale#indicator_ok = ""
+let g:lightline#ale#indicator_checking = ""
+" let g:lightline#ale#indicator_checking = ""
+
+
+
+function! LightlineFilename()
+  let fname = winwidth(0) > 120 ? expand('%:p') : expand('%:t')
+  let nr = bufnr('')
+  return nr . ":" . fname
+endfunction
+
+function! LightlineModified()
+  return &mod ? '*' : ''
+endfunction
+
+let s:special_filetypes = ['help', 'vundle', 'nerdtree', 'vim-minimap']
+
+function! LightlineMode()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
+  return lightline#mode()
+endfunction
+
+function! LightlineFiletype()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
+  return &ft !=# "" ? &ft : "no ft"
+endfunction
+
+function! LightlineFileencoding()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
+  return &fenc !=# "" ? &fenc : &enc
+endfunction
+
+function! LightlineFileformat()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
+  return &ff
+endfunction
+
 
 
 " ### UltiSnips
@@ -543,6 +547,10 @@ let g:NERDTreePatternMatchHighlightColor['.*\.tfrecords$'] = "3F51B5"
 let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
 let g:NERDTreePatternMatchHighlightColor['.*\.sh$'] = "EA80FC"
 
+" ### Undotree
+
+nnoremap <Leader>u :UndotreeToggle<CR>
+
 " # Basics
 
 " set timeoutlen=500 " max delay (ms) between multy key-stroke commands
@@ -629,12 +637,13 @@ nnoremap <Leader>hh :set list!<CR>
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 set t_ut=  " fixes background incompatibility between vim and tmux
 
+" lightline color scheme
+let g:lightline.colorscheme = 'cheerfully_dark'
+
+
 " general color theme
 colorscheme cheerfully_dark
 " colorscheme cheerfully_light
-
-" lightline color scheme
-let g:lightline.colorscheme = 'cheerfully_dark'
 
 if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
 "  set t_8f=^[[38;2;%lu;%lu;%lum

@@ -1205,16 +1205,29 @@ let s:p = {
       \}
 let s:p.normal.left = [
       \   ColorFromMaterialNames('Blue Grey 50', 'Blue Grey 800'),
-      \   ColorFromMaterialNames('Blue Grey 50', 'Blue Grey 900'),
       \   ColorFromMaterialNames('Lime 500', 'Blue Grey 900'),
       \ ]
 let s:p.normal.right = [
       \   ColorFromMaterialNames('Pink 900', 'Amber 300'),
-      \   ColorFromMaterialNames('Grey 400', 'Blue Grey 800'),
+      \   ColorFromMaterialNames('Grey 400', 'Blue Grey 700'),
       \ ]
 let s:p.normal.middle = [
       \   ColorFromMaterialNames('Grey 400', 'Blue Grey 900'),
       \ ]
+
+let s:p.normal.ALEchecking = [
+      \   ColorFromMaterialNames('Yellow 700', 'Black'),
+      \ ]
+let s:p.normal.ALEerror = [
+      \   ColorFromMaterialNames('Blue Grey 200', 'Red 900'),
+      \ ]
+let s:p.normal.ALEwarning = [
+      \   ColorFromMaterialNames('Blue Grey 800', 'Yellow 700'),
+      \ ]
+let s:p.normal.ALEok = [
+      \   ColorFromMaterialNames('Green 900', 'Lime 800'),
+      \ ]
+
 
 let s:p.insert = deepcopy(s:p.normal)
 let s:p.visual = deepcopy(s:p.normal)

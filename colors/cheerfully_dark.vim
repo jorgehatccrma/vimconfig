@@ -56,7 +56,7 @@ call cheerfully#SetHi("SignColumn",      { 'bg': 0, 'fg': 244})
 " NeoVim has a reversed interpretation of BG and FG than vim
 call cheerfully#SetHi("VertSplit",       { 'bg': 0, 'fg': 70, 'usenone': 1})
 if has('nvim')
-  call cheerfully#SetHi("VertSplit",       { 'bg': 70, 'fg': 0, 'usenone': 1})
+  call cheerfully#SetHi("VertSplit",     { 'bg': 70, 'fg': 0, 'usenone': 1})
 endif
 call cheerfully#SetHi("TabLine",         { 'bg': 28, 'fg': 255})
 call cheerfully#SetHi("TabLineFill",     { 'bg': 0, 'fg': 255, 'usenone': 1})
@@ -145,7 +145,7 @@ call cheerfully#SetHi("Underlined", {'fg': 220})
 "  palette red is too bright for background
 call cheerfully#SetHi("Error", {'bg': 124})
 
-call cheerfully#SetHi("Todo", {'bg': 178, 'fg': 52})
+call cheerfully#SetHi("Todo", {'bg': 81, 'fg': 0})
 
 
 " ------------------------
@@ -168,6 +168,7 @@ hi  link pythonDecoratorName pythonDecorator
 hi  link pythonBuiltin    PreProc
 " hi   pythonExceptions   guifg=#ffff00     ctermfg=226
 " hi   link               pythonDecorator   Function
+hi  link pythonTodo       Todo
 
 " C/C++
 
