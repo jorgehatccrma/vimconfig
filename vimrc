@@ -98,7 +98,11 @@ Plug 'majutsushi/tagbar'
 Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 Plug 'othree/html5-syntax.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
 Plug 'motus/pig.vim'
 Plug 'danro/rename.vim'
 Plug 'rhysd/vim-clang-format'
@@ -227,6 +231,8 @@ let g:NERDCustomDelimiters = {
 
 " Hide certain files and folders
 let NERDTreeIgnore=['__pycache__$[[dir]]', '\.pyc$[[file]]']
+
+
 
 " ### Syntastic
 let g:syntastic_enable_python_checker = 1
@@ -378,7 +384,9 @@ let g:lightline#ale#indicator_warnings = ''
 let g:lightline#ale#indicator_errors = ''
 let g:lightline#ale#indicator_ok = ""
 " let g:lightline#ale#indicator_ok = ""
-let g:lightline#ale#indicator_checking = ""
+" let g:lightline#ale#indicator_checking = " ..."
+let g:lightline#ale#indicator_checking = "嗢..."
+" let g:lightline#ale#indicator_checking = ""
 " let g:lightline#ale#indicator_checking = ""
 
 
@@ -550,6 +558,43 @@ let g:NERDTreePatternMatchHighlightColor['.*\.sh$'] = "EA80FC"
 " ### Undotree
 
 nnoremap <Leader>u :UndotreeToggle<CR>
+
+
+" ### Fzf
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Statement'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'VimVar'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'String'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Identifier'],
+  \ 'marker':  ['fg', 'Statement'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+
 
 " # Basics
 
