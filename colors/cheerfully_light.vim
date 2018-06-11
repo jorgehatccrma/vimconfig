@@ -213,3 +213,18 @@ call cheerfully#SetHi("InactiveBuffer", {'bg': 238, 'fg': 241, 'usenone': 1})
 
 " NOTE: these bufferline highlight groups can be overriden in the airline
 " theme, allowing to change highlight depending on the mode
+
+
+" ------------------------
+"  ALE Specific Ones
+" ------------------------
+
+" Try to keep these in sync with ALE's colortheme
+" (~/.vim/autoload/lightline/colorscheme/cheerfully_dark.vim)
+call cheerfully#SetHi("ALEErrorSign",               {'bg': 160, 'fg': 237})
+call cheerfully#SetHi("ALEStyleErrorSign",          {'bg': 160, 'fg': 237})
+call cheerfully#SetHi("ALEWarningSign",             {'bg': 238, 'fg': 214})
+call cheerfully#SetHi("ALEStyleWarningSign",        {'bg': 238, 'fg': 214})
+call cheerfully#SetHi("ALEInfoSign",                {'bg':  22, 'fg': 142})
+call cheerfully#SetHi("ALESignColumnWithErrors",    {'bg': 196, 'fg': 255})
+call cheerfully#SetHi("ALESignColumnWithoutErrors", {'bg': 196, 'fg': 255})
