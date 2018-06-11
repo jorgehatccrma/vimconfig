@@ -234,59 +234,6 @@ let NERDTreeIgnore=['__pycache__$[[dir]]', '\.pyc$[[file]]']
 
 
 
-" ### Syntastic
-let g:syntastic_enable_python_checker = 1
-" let g:syntastic_python_checkers = ['pycodestyle', 'flake8']
-" let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_python_checkers = ['pylint', 'flake8']
-let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_mode_map = {
-      \ "mode": "active",
-      \ "passive_filetypes": [
-            \ "cpp", "c",
-            \ "hpp", "h",
-            \ ] }
-
-" see https://github.com/jasonlong/dotfiles/blob/master/vimrc for more ignores
-let g:syntastic_html_tidy_ignore_errors = [
-            \ "<svg> is not recognized!",
-            \ "discarding unexpected <svg>",
-            \ "discarding unexpected </svg>",
-            \ ]
-
-" use jshint
-" let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_javascript_checkers = ['eslint']
-
-" ignore some html warnings/errors
-let g:syntastic_html_tidy_ignore_errors= [
-      \ "'<' + '/' + letter not allowed here",
-      \ "<svg> is not recognized!",
-      \ "discarding unexpected <svg>",
-      \ "discarding unexpected </svg>",
-      \ "<input> proprietary attribute \"min\"",
-      \ "<input> proprietary attribute \"max\"",
-      \ "<input> proprietary attribute \"oninput\"",
-      \]
-
-let g:syntastic_quiet_messages = {
-      \ "regex": ".*['.*'] is better written in dot notation."
-      \}
-
-
-let g:flake8_ignore="E402,E501"
-
-
-
 " ### ALE
 
 " Specify linters for specific languages (other languages will use all availbale
@@ -318,6 +265,13 @@ let g:ale_sign_warning = ''
 " let g:ale_sign_warning = ''
 " let g:ale_sign_warning = ''
 " let g:ale_sign_warning = '⚠'
+
+" Add new mappings (this will override some default vim-unimpaired mappings
+" I don't really use
+let g:nremap = {"[a": "",  "]a": ""}
+noremap [a :ALEPreviousWrap<CR>
+noremap ]a :ALENextWrap<CR>
+
 
 
 " ### Lightline
