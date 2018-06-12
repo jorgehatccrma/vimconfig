@@ -144,6 +144,7 @@ Plug 'neo4j-contrib/cypher-vim-syntax'
 
 " CSS
 Plug 'ap/vim-css-color'
+Plug 'chrisbra/Colorizer'
 
 " File coloring
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
@@ -951,6 +952,12 @@ if has("autocmd")
 
     " disable automatic line breaks in  markdown
     autocmd FileType markdown setlocal formatoptions-=t
+
+    " Run color highlighter for cheerfully related stuff
+    " (depends on `chrisbra/Colorizer`)
+    autocmd BufEnter *cheerfully* :ColorHighlight
+    autocmd BufEnter */.tmux/*.conf :ColorHighlight
+    autocmd BufEnter */.tmux.conf :ColorHighlight
 
   augroup END
 
