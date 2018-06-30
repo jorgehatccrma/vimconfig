@@ -1,5 +1,7 @@
 " vim:foldmethod=expr:foldlevel=0:foldexpr=MDFold(v\:lnum):foldtext=FoldText()
 
+" # File Help
+"
 " Tips to navigate this file
 " -----------------------------------------------------------------------------
 
@@ -69,59 +71,42 @@ call plug#begin('~/.vim/bundle')
 " To access help for vim-plug itself
 Plug 'junegunn/vim-plug'
 
+" General purpose plugins
+
 " Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
 Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-" Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'gerw/vim-HiLinkTrace'
 Plug 'tpope/vim-unimpaired'
-Plug 'honza/dockerfile.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
+Plug 'junegunn/goyo.vim'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'sirver/ultisnips'
 " Ultisnippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-Plug 'JamshedVesuna/vim-markdown-preview'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
-Plug 'bling/vim-bufferline'
+Plug 'gerw/vim-HiLinkTrace'
 Plug 'majutsushi/tagbar'
-Plug 'pangloss/vim-javascript'
-Plug 'othree/html5.vim'
-Plug 'othree/html5-syntax.vim'
-
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-
-Plug 'motus/pig.vim'
 Plug 'danro/rename.vim'
-Plug 'rhysd/vim-clang-format'
-Plug 'moll/vim-node'
-" Plug 'wookiehangover/jshint.vim'
-" Plug 'walm/jshint.vim'
-" Plug 'Shutnik/jshint2.vim'
-Plug 'mxw/vim-jsx'
-Plug 'fatih/vim-go'
-" Plug 'dodie/vim-disapprove-deep-indentation'
+" Simple buffer explorer
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'bling/vim-bufferline'
+" File coloring
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
+Plug 'ryanoasis/vim-devicons', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
+" Visualize undo tree
+Plug 'mbbill/undotree'
 
 " Google's code formatting tools
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
-
-" LaTeX
-Plug 'lervag/vimtex'
-Plug 'matze/vim-tex-fold'
 
 " expanded targets and text objects. See
 " http://owen.cymru/vim-text-objects-extend-vims-natural-language-2/
@@ -133,29 +118,49 @@ Plug 'sgur/vim-textobj-parameter'
 Plug 'bps/vim-textobj-python'
 Plug 'libclang-vim/vim-textobj-clang'
 
-" Simple buffer explorer
-Plug 'jeetsukumaran/vim-buffergator'
+" Markdown
+Plug 'plasticboy/vim-markdown'
+Plug 'JamshedVesuna/vim-markdown-preview'
 
+" Python
+Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'tmhedberg/SimpylFold'
+
+" Other languages
+Plug 'motus/pig.vim'
+Plug 'honza/dockerfile.vim'
+
+" HTML, Javascript, Jinja, etc.
+Plug 'pangloss/vim-javascript'
+Plug 'othree/html5.vim'
+Plug 'othree/html5-syntax.vim'
+Plug 'moll/vim-node'
+Plug 'mxw/vim-jsx'
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'wavded/vim-stylus'
+
+" C/C++
+Plug 'rhysd/vim-clang-format'
+
+" GoLang
+Plug 'fatih/vim-go'
+
+" LaTeX
+Plug 'lervag/vimtex'
+Plug 'matze/vim-tex-fold'
 
 " Neo4j / Cypher
 Plug 'neo4j-contrib/cypher-vim-syntax'
 
-" CSS
+" CSS, SASS, Stylus, etc
 Plug 'ap/vim-css-color'
-Plug 'chrisbra/Colorizer'
-
-" File coloring
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
-Plug 'ryanoasis/vim-devicons', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
+" Plug 'chrisbra/Colorizer'
+Plug 'wavded/vim-stylus'
 
 " TOML syntax
 Plug 'cespare/vim-toml'
 
-" Visualize undo tree
-Plug 'mbbill/undotree'
-" Plug 'simnalamburt/vim-mundo'
+" Last but not least
+Plug 'jorgehatccrma/vim-cheerful'
 
 
 " " Brief help
@@ -244,6 +249,8 @@ let g:ale_linters = { 'python': ['pylint', 'flake8'], }
 " let g:ale_fixers = { 'python': ['yapf', ], }
 let g:ale_fixers = { 'python': ['yapf', 'autopep8'], }
 
+let g:ale_python_flake8_options = '--ignore=E402'
+
 let g:ale_fixers['json'] = ['fixjson']
 
 " Better message format
@@ -297,8 +304,8 @@ let g:lightline = {
     \   'active': {
     \     'left': [
     \       ['mode', 'paste'],
-    \       ['readonly', 'filename'],
     \       ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+    \       ['readonly', 'filename'],
     \     ],
     \     'right': [
     \       ['modified'],
@@ -345,15 +352,15 @@ let g:lightline#ale#indicator_checking = "嗢..."
 " let g:lightline#ale#indicator_checking = ""
 
 
-
 function! LightlineFilename()
-  let fname = winwidth(0) > 120 ? expand('%:p') : expand('%:t')
+  " let fname = winwidth(0) > 120 ? expand('%:p') : expand('%:t')
+  let fname = winwidth(0) > 120 ? expand('%:f') : expand('%:t')
   let nr = bufnr('')
   return nr . ":" . fname
 endfunction
 
 function! LightlineModified()
-  return &mod ? '*' : ''
+  return &mod ? '  ' : ''
 endfunction
 
 let s:special_filetypes = ['help', 'vundle', 'nerdtree', 'vim-minimap']
@@ -400,9 +407,11 @@ let g:ultisnips_python_style = "google"
 
 " ### Bufferline
 
-" custom highlight groups to ingrate with vim-airline/theme/cheerfully*
-let g:bufferline_active_highlight = 'ActiveBuffer'
-let g:bufferline_inactive_highlight = 'InactiveBuffer'
+" custom highlight groups to integrate with vim-airline/theme/cheerfully*
+" let g:bufferline_active_highlight = 'Float'
+" let g:bufferline_inactive_highlight = 'String'
+" let g:bufferline_active_highlight = 'ActiveBuffer'
+" let g:bufferline_inactive_highlight = 'InactiveBuffer'
 
 
 
@@ -590,7 +599,7 @@ set tags=./tags,./.tags,tags,.tags;
 
 
 
-" ## Backup, undo and swap files
+" ## Backup, undo, swap and session files
 
 set backup
 set noswapfile
@@ -603,6 +612,7 @@ set undoreload=10000
 set undodir=~/.vim/tmp/undo//     " undo files
 set backupdir=~/.vim/tmp/backup// " backups
 set directory=~/.vim/tmp/swap//   " swap files
+set viewdir=~/.vim/tmp/views//    " window views (see :h :mkview)
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
@@ -613,6 +623,9 @@ if !isdirectory(expand(&backupdir))
 endif
 if !isdirectory(expand(&directory))
     call mkdir(expand(&directory), "p")
+endif
+if !isdirectory(expand(&viewdir))
+    call mkdir(expand(&viewdir), "p")
 endif
 
 
@@ -637,13 +650,14 @@ nnoremap <Leader>hh :set list!<CR>
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 set t_ut=  " fixes background incompatibility between vim and tmux
 
-" lightline color scheme
-let g:lightline.colorscheme = 'cheerfully_dark'
-
-
 " general color theme
-colorscheme cheerfully_dark
-" colorscheme cheerfully_light
+let g:bolero#maincolor = 'Indigo'
+colorscheme bolero_dark
+" colorscheme bolero_light
+
+" lightline color scheme
+let g:lightline.colorscheme = 'bolero'
+
 
 if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
 "  set t_8f=^[[38;2;%lu;%lu;%lum
@@ -686,10 +700,10 @@ syntax enable          " enable syntax highlighting
 set colorcolumn=80     " visible mark at 80 characters
 set textwidth=80       " define text width
 set mouse=a            " Mouse on in every mode
-set relativenumber     " display relaive numbers by default
 set number             " show line numbers
+set relativenumber     " display relaive numbers by default
 set cursorline         " always hightlight cursor line
-set foldcolumn=3       " show 3 fold levels in the gutter
+set foldcolumn=1       " show 3 fold levels in the gutter
 " set lazyredraw         " redraw only when we need to.
 set showmatch          " highlight matching [{()}]
 set scrolloff=5        " number of context lines above and below the cursor
@@ -857,7 +871,7 @@ nnoremap <leader>S ^vg_y:execute @@<cr>:echo 'Sourced line.'<cr>
 " # Searching & Movements
 " -----------------------------------------------------------------------------
 
-set hlsearch             " highlight all seardh matches
+set hlsearch             " highlight all search matches
 set incsearch            " search as characters are entered
 set ignorecase smartcase " case insensitive search
 
@@ -953,13 +967,15 @@ if has("autocmd")
     " disable automatic line breaks in  markdown
     autocmd FileType markdown setlocal formatoptions-=t
 
-    " Run color highlighter for cheerfully related stuff
-    " (depends on `chrisbra/Colorizer`)
-    autocmd BufEnter *cheerfully* :ColorHighlight
-    autocmd BufEnter */.tmux/*.conf :ColorHighlight
-    autocmd BufEnter */.tmux.conf :ColorHighlight
-
   augroup END
+
+  " augroup Coloring
+  "   " Run color highlighter for cheerfully related stuff
+  "   " (depends on `https://github.com/chrisbra/Colorizer`)
+  "   autocmd BufEnter *cheerfully* :ColorHighlight
+  "   autocmd BufEnter */.tmux/*.conf :ColorHighlight
+  "   autocmd BufEnter */.tmux.conf :ColorHighlight
+  " augroup END
 
   augroup Comments
     autocmd FileType * let g:NERDDefaultAlign='left'
@@ -1002,15 +1018,24 @@ if has("autocmd")
   "   " autocmd FileType gn AutoFormatBuffer gn
   "   autocmd FileType html,css,json AutoFormatBuffer js-beautify
   "   " autocmd FileType java AutoFormatBuffer google-java-format
-  "   autocmd FileType python AutoFormatBuffer yapf
+    autocmd FileType python AutoFormatBuffer yapf
     " the next line depends on https://github.com/darold/pgFormatter
     " ... mmmmm, doesn't work cause pg_format is not a valid vim-codefmt
     " formatter. As a hacky solution you can do `:!pg_format %`
     " autocmd FileType sql AutoFormatBuffer pg_format
   augroup END
 
-endif
+  " " Keep track of opened/closed folds in files
+  " " From https://til.hashrocket.com/posts/17c44eda91-persistent-folds-between-vim-sessions
+  " augroup AutoSaveFolds
+  "   autocmd!
+  "   " autocmd BufWinLeave *vimrc*,*.vim mkview
+  "   " autocmd BufWinEnter *vimrc*,*.vim silent loadview
+  "   autocmd BufWinLeave *vimrc*,*.vim execute "mkview! " . expand('<afile>:p:h') . "/." . expand('<afile>:t') . ".view"
+  "   autocmd BufWinEnter *vimrc*,*.vim execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
+  " augroup END
 
+endif
 
 
 
@@ -1079,7 +1104,7 @@ endfunction
 
 " Toggle between the two cheerfully_* themes (dark/light)
 function! Cheers()
-  echom "CHEERS!"
+  " echom "CHEERS!"
   if g:colors_name ==# 'cheerfully_dark'
     if exists('g:airline_theme')
       let g:airline_theme = 'cheerfully_light'

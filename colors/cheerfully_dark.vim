@@ -229,3 +229,15 @@ call cheerfully#SetHi("ALEStyleWarningSign",        {'bg': 214, 'fg': 238})
 call cheerfully#SetHi("ALEInfoSign",                {'bg': 142, 'fg':  22})
 call cheerfully#SetHi("ALESignColumnWithErrors",    {'bg': 255, 'fg': 196})
 call cheerfully#SetHi("ALESignColumnWithoutErrors", {'bg': 255, 'fg': 196})
+
+
+
+" ------------------------
+"  TagBar Specific Ones
+" ------------------------
+" call cheerfully#SetHi("TagbarKind",  {'fg': 214})
+" call cheerfully#SetHi("TagbarScope", {'fg': 196})
+" call cheerfully#SetHi("TagbarType",  {'fg': 28})
+hi link TagbarScope pythonFunction
+hi link TagbarKind PreProc
+hi link TagbarType Type

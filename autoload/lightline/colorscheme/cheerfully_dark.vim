@@ -1233,6 +1233,7 @@ let s:p.insert = deepcopy(s:p.normal)
 let s:p.visual = deepcopy(s:p.normal)
 let s:p.select = deepcopy(s:p.normal)
 let s:p.replace = deepcopy(s:p.normal)
+let s:p.inactive = deepcopy(s:p.normal)
 
 let s:p.insert.left[0] = ColorFromMaterialNames('Green 900', 'Yellow 500')
 let s:p.visual.left[0] = ColorFromMaterialNames('Green 900', 'Light Green 500')
