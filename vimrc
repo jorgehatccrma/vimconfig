@@ -87,6 +87,7 @@ Plug 'severin-lemaignan/vim-minimap'
 Plug 'sirver/ultisnips'
 " Ultisnippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
+Plug 'itchyny/vim-gitbranch'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 Plug 'gerw/vim-HiLinkTrace'
@@ -288,12 +289,13 @@ set noshowmode
 set laststatus=2
 
 " \   'separator': { 'left': '', 'right': '' },
-" \   'subseparator': { 'left': '│', 'right': '│'},
+" \   'subseparator': { 'left': '', 'right': '│'},
 let g:lightline = {
     \   'colorscheme': 'wombat',
     \   'separator': { 'left': '', 'right': '' },
     \   'subseparator': { 'left': '│', 'right': '│'},
     \   'component_function': {
+    \     'gitbranch': 'LightlineGitBranch',
     \     'filename': 'LightlineFilename',
     \     'modified': 'LightlineModified',
     \     'mode': 'LightlineMode',
@@ -305,7 +307,7 @@ let g:lightline = {
     \     'left': [
     \       ['mode', 'paste'],
     \       ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
-    \       ['readonly', 'filename'],
+    \       ['readonly', 'gitbranch', 'filename'],
     \     ],
     \     'right': [
     \       ['modified'],
@@ -391,6 +393,11 @@ function! LightlineFileformat()
     return ''
   endif
   return &ff
+endfunction
+
+function! LightlineGitBranch()
+  let bname = gitbranch#name()
+  return ' ' . bname
 endfunction
 
 
