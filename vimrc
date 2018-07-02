@@ -293,7 +293,7 @@ set laststatus=2
 let g:lightline = {
     \   'colorscheme': 'wombat',
     \   'separator': { 'left': '', 'right': '' },
-    \   'subseparator': { 'left': '│', 'right': '│'},
+    \   'subseparator': { 'left': '┆', 'right': '┆'},
     \   'component_function': {
     \     'gitbranch': 'LightlineGitBranch',
     \     'filename': 'LightlineFilename',
@@ -396,7 +396,13 @@ function! LightlineFileformat()
 endfunction
 
 function! LightlineGitBranch()
+  if index(s:special_filetypes, &filetype) >= 0
+    return ''
+  endif
   let bname = gitbranch#name()
+  if bname ==? ''
+    return ''
+  endif
   return ' ' . bname
 endfunction
 
