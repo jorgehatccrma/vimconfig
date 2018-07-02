@@ -100,7 +100,7 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bling/vim-bufferline'
 " File coloring
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
-Plug 'ryanoasis/vim-devicons', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
+" Plug 'ryanoasis/vim-devicons', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
 " Visualize undo tree
 Plug 'mbbill/undotree'
 
