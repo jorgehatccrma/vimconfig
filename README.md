@@ -45,25 +45,33 @@ git clone git@github.com:jorgehatccrma/vimconfig.git ~/.vim
      I personally don't like this one, as it breaks some of my config, but
      some people like to use it.
 
-3. Launch Vim and Install plugins
-
-The first time you launch Vim, it should automatically install
-[Vundle](https://github.com/VundleVim/Vundle.vim), which is the plugin manager
-of my choice. Only the manager is installed automatically. The plugins you need
-to install from within Vim with a single command:
-
-    :PluginInstall
-
-I could have chosen to trigger this command automatically, but that would force
-you to use all the plugins I've added to `vimrc`. You might want to tweak that
-list before running the `:PluginInstall` command.
-
-**NOTE**: Installing all the pluings in my `vimrc` could take a while.
-
 ### NeoVim
 
 I recently installed [NeoVim](https://neovim.io) to try it out. A simple way to
 use this repo as the NeoVim config is to link `~/.vim/init.vim` to `.vim/vimrc`:
 
     ln -s ~/.vim/vimrc ~/.vim/init.vim
+
+
+3. Launch Vim and Install plugins
+
+The first time you launch Vim, it should automatically install
+[Vim Plug](https://github.com/junegunn/vim-plug), which is the plugin manager
+of my choice. Only the manager is installed automatically. The plugins you need
+to install from within Vim with a single command:
+
+    :PlugInstall
+
+I could have chosen to trigger this command automatically, but that would force
+you to use all the plugins I've added to `vimrc`. You might want to tweak that
+list before running the `:PlugInstall` command.
+
+To update plugins, just run
+
+    :PlugUpdate
+
+If you remove pluings, is recommended to run
+
+    :PlugClean
+
 

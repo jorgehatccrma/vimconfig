@@ -218,9 +218,11 @@ let vim_markdown_preview_browser='Google Chrome'
 " let vim_markdown_preview_browser='Opera'
 
 
+
 " ### Minimap
 
 let g:minimap_toggle='<leader>mm'
+
 
 
 " ### NERDCommenter
@@ -439,6 +441,9 @@ map <Leader>b :BuffergatorToggle<CR>
 
 
 " ### Tagbar
+
+" set focus to TabBar automatically
+let g:tagbar_autofocus = 1
 
 " toggle tag bar
 nmap <Leader>tb :TagbarToggle<CR>
@@ -664,11 +669,8 @@ set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 set t_ut=  " fixes background incompatibility between vim and tmux
 
 " general color theme
-let g:bolero#maincolor = 'Indigo'
+let g:bolero#maincolor = 'Light Blue'
 colorscheme bolero_dark
-" colorscheme bolero_light
-
-" lightline color scheme
 let g:lightline.colorscheme = 'bolero'
 
 
@@ -1118,15 +1120,9 @@ endfunction
 " Toggle between the two cheerfully_* themes (dark/light)
 function! Cheers()
   " echom "CHEERS!"
-  if g:colors_name ==# 'cheerfully_dark'
-    if exists('g:airline_theme')
-      let g:airline_theme = 'cheerfully_light'
-    endif
-    colorscheme cheerfully_light
+  if g:colors_name ==# 'bolero_dark'
+    colorscheme bolero_light
   else
-    if exists('g:airline_theme')
-      let g:airline_theme = 'cheerfully_dark'
-    endif
-    colorscheme cheerfully_dark
+    colorscheme bolero_dark
   endif
 endfunction
