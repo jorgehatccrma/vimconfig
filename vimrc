@@ -69,10 +69,23 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " To access help for vim-plug itself
+Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'junegunn/vim-plug'
 
 " General purpose plugins
 
+""""""""""""""""""""""""""""""""""""""""
+" Currently being evaluated
+""""""""""""""""""""""""""""""""""""""""
+Plug 'terryma/vim-expand-region'
+" Visualize undo tree
+Plug 'mbbill/undotree'
+Plug 'tpope/vim-abolish'
+Plug 'airblade/vim-gitgutter'
+
+""""""""""""""""""""""""""""""""""""""""
+" Approved plugins
+""""""""""""""""""""""""""""""""""""""""
 " Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
 Plug 'scrooloose/nerdcommenter'
@@ -101,8 +114,7 @@ Plug 'bling/vim-bufferline'
 " File coloring
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
 " Plug 'ryanoasis/vim-devicons', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
-" Visualize undo tree
-Plug 'mbbill/undotree'
+
 
 " Google's code formatting tools
 Plug 'google/vim-maktaba'
@@ -542,6 +554,16 @@ let g:NERDTreePatternMatchHighlightColor['.*\.sh$'] = "EA80FC"
 nnoremap <Leader>u :UndotreeToggle<CR>
 
 
+" ### Yankstack
+
+" nmap <leader>p <Plug>yankstack_substitute_older_paste
+" nmap <leader>P <Plug>yankstack_substitute_newer_paste
+
+" Force loading YanStack asap, to avoid overriding my custom `S` mapping
+" (similar to https://github.com/maxbrunsfeld/vim-yankstack/issues/9)
+call yankstack#setup()
+
+
 " ### Fzf
 
 " This is the default extra key bindings
@@ -577,6 +599,18 @@ let g:fzf_colors =
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 
+
+" ### Vim Expand Region
+
+map <M-+> <Plug>(expand_region_expand)
+map <M-_> <Plug>(expand_region_shrink)
+
+
+
+" ### Git Gutter
+
+" enable line highlighting by default
+let g:gitgutter_highlight_lines = 1
 
 " # Basics
 
@@ -670,6 +704,7 @@ set t_ut=  " fixes background incompatibility between vim and tmux
 
 " general color theme
 let g:bolero#maincolor = 'Light Blue'
+" let g:bolero#maincolor = 'Deep Orange'
 colorscheme bolero_dark
 let g:lightline.colorscheme = 'bolero'
 
