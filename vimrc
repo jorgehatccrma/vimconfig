@@ -82,13 +82,15 @@ Plug 'terryma/vim-expand-region'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-abolish'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-commentary'
+
 
 """"""""""""""""""""""""""""""""""""""""
 " Approved plugins
 """"""""""""""""""""""""""""""""""""""""
 " Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-unimpaired'
@@ -148,8 +150,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 Plug 'othree/html5-syntax.vim'
 Plug 'moll/vim-node'
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'maksimr/vim-jsbeautify'
 
 " C/C++
 Plug 'rhysd/vim-clang-format'
@@ -217,6 +220,36 @@ nmap <silent> <Leader>p :execute "NERDTreeToggle" getcwd()<CR>
 " hightlight current file on the tree
 nmap <Leader>f :NERDTreeFind<CR>
 
+" Hide certain files and folders
+let NERDTreeIgnore=[
+      \ '__pycache__$[[dir]]',
+      \ '\.pyc$[[file]]',
+      \ ]
+
+
+
+" ### NERDCommenter
+" let g:NERDDefaultAlign = 'left'
+" " let g:NERDDefaultAlign = 'start'
+
+" " add extrace space after comment character, for every language
+" let NERDSpaceDelims = 1
+
+" " change comment character for .ini files
+" let g:NERDCustomDelimiters = {
+"     \ 'text': { 'left': '#'},
+"     \ 'python': { 'left': '#', 'leftAlt': '#' },
+" \ }
+
+" if has("autocmd")
+"   augroup Comments
+"     autocmd FileType * let g:NERDDefaultAlign='left'
+"     autocmd FileType dosini let g:NERDDefaultAlign='start'
+"   augroup END
+" endif
+
+
+
 " ### Markdown
 " Disable plasticboy/vim-markdown's folding
 let g:vim_markdown_folding_disable = 1
@@ -234,24 +267,6 @@ let vim_markdown_preview_browser='Google Chrome'
 " ### Minimap
 
 let g:minimap_toggle='<leader>mm'
-
-
-
-" ### NERDCommenter
-let g:NERDDefaultAlign = 'left'
-" let g:NERDDefaultAlign = 'start'
-
-" add extrace space after comment character, for every language
-let NERDSpaceDelims = 1
-
-" change comment character for .ini files
-let g:NERDCustomDelimiters = {
-    \ 'text': { 'left': '#'},
-    \ 'python': { 'left': '#', 'leftAlt': '#' },
-\ }
-
-" Hide certain files and folders
-let NERDTreeIgnore=['__pycache__$[[dir]]', '\.pyc$[[file]]']
 
 
 
@@ -358,14 +373,14 @@ let g:lightline.component_type = {
 " let g:lightline#ale#indicator_ok = "\uf00c"
 " let g:lightline#ale#indicator_checking = "\uf110"
 
-let g:lightline#ale#indicator_warnings = ''
-let g:lightline#ale#indicator_errors = ''
-let g:lightline#ale#indicator_ok = ""
-" let g:lightline#ale#indicator_ok = ""
+let g:lightline#ale#indicator_warnings = ' '
+let g:lightline#ale#indicator_errors = ' '
+let g:lightline#ale#indicator_ok = " "
+" let g:lightline#ale#indicator_ok = " "
 " let g:lightline#ale#indicator_checking = " ..."
 let g:lightline#ale#indicator_checking = "嗢..."
-" let g:lightline#ale#indicator_checking = ""
-" let g:lightline#ale#indicator_checking = ""
+" let g:lightline#ale#indicator_checking = " "
+" let g:lightline#ale#indicator_checking = " "
 
 
 function! LightlineFilename()
@@ -611,6 +626,9 @@ map <M-_> <Plug>(expand_region_shrink)
 
 " enable line highlighting by default
 let g:gitgutter_highlight_lines = 1
+
+map <leader>g :GitGutterToggle<CR>
+
 
 " # Basics
 
@@ -982,7 +1000,7 @@ if has("autocmd")
     autocmd FileType css,scss,less setlocal sw=2 ts=2 sts=2 expandtab
     autocmd FileType yaml setlocal sw=2 ts=2 sts=2 expandtab
     autocmd FileType python setlocal sw=4 ts=4 sts=4 expandtab
-    autocmd FileType javascript setlocal ts=2 sts=2 sw=2 noexpandtab
+    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType cmake setlocal sw=4 ts=4 sts=4 expandtab
     autocmd FileType sql setlocal sw=4 ts=4 sts=4 expandtab
 
@@ -1026,11 +1044,6 @@ if has("autocmd")
   "   autocmd BufEnter */.tmux/*.conf :ColorHighlight
   "   autocmd BufEnter */.tmux.conf :ColorHighlight
   " augroup END
-
-  augroup Comments
-    autocmd FileType * let g:NERDDefaultAlign='left'
-    autocmd FileType dosini let g:NERDDefaultAlign='start'
-  augroup END
 
   augroup LineNumbers
     autocmd!
