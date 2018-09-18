@@ -790,6 +790,13 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
 "nicer pane separators
 set fillchars=vert:│
 
+" Font to use in MacVim
+" if has("gui_running")
+if has("gui_macvim")
+    set guifont=CodeZen\ Nerd\ Font:h14,Menlo:h14,Monaco:h14,monospace:h14
+endif
+
+
 " ## Wildmenu
 
 " set wildmode=list:longest

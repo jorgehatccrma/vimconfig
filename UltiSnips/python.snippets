@@ -58,3 +58,15 @@ snippet itrace
 import ipdb
 ipdb.set_trace()
 endsnippet
+
+snippet log
+logger = logging.getLogger(${1:__name__})
+endsnippet
+
+snippet info
+logger.debug(${1:message})
+endsnippet
+
+snippet debug
+logger.debug(${1:message})
+endsnippet
