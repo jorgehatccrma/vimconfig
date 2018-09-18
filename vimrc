@@ -59,10 +59,19 @@ let os = substitute(system('uname'), "\n", "", "")
 " -----------------------------------------------------------------------------
 
 " Install vim-plug if not present
+" (Vim version)
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Install vim-plug if not present
+" (NVim version)
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
 endif
 
 " vim-plug will handle plugins
@@ -628,6 +637,14 @@ map <M-_> <Plug>(expand_region_shrink)
 let g:gitgutter_highlight_lines = 1
 
 map <leader>g :GitGutterToggle<CR>
+
+
+
+" ### Vim-commentary
+
+autocmd FileType text setlocal commentstring=#\ %s
+
+
 
 
 " # Basics
