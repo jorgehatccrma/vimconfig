@@ -34,6 +34,11 @@
 " Must be first line !!!!
 set nocompatible   " disable Vi compatible mode (must be first line!!!)
 
+" For homebrewed (neo)vim, do it uses the python it was installed with,
+" regardelss of the active (virtual)env
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 
 " ## OS specific stuff
 
@@ -89,9 +94,6 @@ Plug 'junegunn/vim-plug'
 Plug 'terryma/vim-expand-region'
 " Visualize undo tree
 Plug 'mbbill/undotree'
-Plug 'tpope/vim-abolish'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-commentary'
 
 
 """"""""""""""""""""""""""""""""""""""""
@@ -106,6 +108,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
+Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/goyo.vim'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'sirver/ultisnips'
@@ -141,6 +146,8 @@ Plug 'kana/vim-textobj-indent'
 Plug 'sgur/vim-textobj-parameter'
 Plug 'bps/vim-textobj-python'
 Plug 'libclang-vim/vim-textobj-clang'
+" Plug 'poetic/vim-textobj-javascript'  " this one doesn't seem to work
+Plug 'thinca/vim-textobj-function-javascript'
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
@@ -158,7 +165,7 @@ Plug 'honza/dockerfile.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 Plug 'othree/html5-syntax.vim'
-Plug 'moll/vim-node'
+" Plug 'moll/vim-node'
 " Plug 'mxw/vim-jsx'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'maksimr/vim-jsbeautify'
@@ -174,7 +181,7 @@ Plug 'lervag/vimtex'
 Plug 'matze/vim-tex-fold'
 
 " Neo4j / Cypher
-Plug 'neo4j-contrib/cypher-vim-syntax'
+" Plug 'neo4j-contrib/cypher-vim-syntax'
 
 " CSS, SASS, Stylus, etc
 Plug 'ap/vim-css-color'
@@ -284,13 +291,22 @@ let g:minimap_toggle='<leader>mm'
 " Specify linters for specific languages (other languages will use all availbale
 " linters
 " let g:ale_linters = { 'python': ['flake8', ], }
-let g:ale_linters = { 'python': ['pylint', 'flake8'], }
+let g:ale_linters = {
+      \ 'python': ['pylint', 'flake8'],
+      \ 'javascript': ['prettier_eslint'],
+      \}
 " let g:ale_fixers = { 'python': ['yapf', ], }
-let g:ale_fixers = { 'python': ['yapf', 'autopep8'], }
+let g:ale_fixers = {
+      \ 'python': ['yapf', 'autopep8'],
+      \ 'javascript': ['prettier'],
+      \ 'css': ['prettier'],
+      \ 'json': ['fixjson'],
+      \}
+" for the JS/CSS fixer and linter, you'll need to run these commands:
+"   `npm install --global prettier`
+"   `npm install --global prettier-eslint-cli`
 
 let g:ale_python_flake8_options = '--ignore=E402'
-
-let g:ale_fixers['json'] = ['fixjson']
 
 " Better message format
 let g:ale_echo_msg_error_str = 'E'
@@ -318,6 +334,8 @@ let g:ale_sign_warning = ''
 let g:nremap = {"[a": "",  "]a": ""}
 noremap [a :ALEPreviousWrap<CR>
 noremap ]a :ALENextWrap<CR>
+
+let g:ale_fix_on_save = 1
 
 
 
@@ -1024,7 +1042,7 @@ if has("autocmd")
     autocmd FileType css,scss,less setlocal sw=2 ts=2 sts=2 expandtab
     autocmd FileType yaml setlocal sw=2 ts=2 sts=2 expandtab
     autocmd FileType python setlocal sw=4 ts=4 sts=4 expandtab
-    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType cmake setlocal sw=4 ts=4 sts=4 expandtab
     autocmd FileType sql setlocal sw=4 ts=4 sts=4 expandtab
 
@@ -1104,6 +1122,7 @@ if has("autocmd")
   "   autocmd FileType go AutoFormatBuffer gofmt
   "   " autocmd FileType gn AutoFormatBuffer gn
   "   autocmd FileType html,css,json AutoFormatBuffer js-beautify
+    " autocmd FileType javascript,json,css AutoFormatBuffer js-beautify
   "   " autocmd FileType java AutoFormatBuffer google-java-format
     autocmd FileType python AutoFormatBuffer yapf
     " the next line depends on https://github.com/darold/pgFormatter
